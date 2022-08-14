@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	{% include 'base/head.html' %}
+	<title>{% block title %}{% endblock %} - Loan App</title>
+</head>
+<body id="page-top">
+	<div id="wrapper">
+		{% include 'base/sidebar.html' %}
+		<div id="content-wrapper" class="d-flex flex-column">
+			<div id="content">
+				{% include 'base/topbar.html' %}
+				<!-- Container Fluid-->
+				<div class="container-fluid" id="container-wrapper">
+					{% include 'base/breadcrumb.html' %}
+					{% include 'base/message.html' %}
+					{% block content %}{% endblock %}
+					{% include 'base/logout_modal.html' %}
+				</div>
+				<!---Container Fluid-->
+			</div>
+			{% include 'base/footer.html' %}
+		</div>
+	</div>
+	{% include 'base/scroll_to_top.html' %}
+	{% include 'base/scripts.html' %}
+</body>
+</html>

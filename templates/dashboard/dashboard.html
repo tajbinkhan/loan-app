@@ -1,0 +1,211 @@
+{% extends 'base/base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+
+
+<!-- Row -->
+<div class="row">
+	{% if requested_list or rejected_list or accepted_list %}
+
+		{% if accepted_list %}
+		<!-- Loan Accepted -->
+		<div class="col-lg-12">
+			<div class="card mb-4">
+				<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+					<h6 class="m-0 font-weight-bold text-primary">Accepted</h6>
+				</div>
+				<div class="table-responsive p-3">
+					<table class="table align-items-center table-flush table-hover" id="accepted">
+						<thead class="thead-light">
+							<tr>
+								<th>Money Lender</th>
+								<th>Amount (BDT)</th>
+								<th>Requested Date</th>
+								<th>Return Date</th>
+								<th>Status</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tfoot>
+							<tr>
+								<th>Money Lender</th>
+								<th>Amount (BDT)</th>
+								<th>Requested Date</th>
+								<th>Return Date</th>
+								<th>Status</th>
+								<th>Action</th>
+							</tr>
+						</tfoot>
+						<tbody>
+							{% for i in accepted_list %}
+							<tr>
+								<td>
+									<a href="{% url 'show_profile' i.money_lender.account_number %}">{{ i.money_lender|title }}</a>
+								</td>
+								<td>{{ i.amount }}</td>
+								<td>{{ i.created|date:"M d, Y" }}</td>
+								<td>{{ i.return_date|date:"M d, Y" }}</td>
+								<td>{{ i.status }}</td>
+								<td>
+									{% if i.editable == 'Not Applied' %}
+									<a href="{% url 'request_for_update' i.form_id %}" class="btn btn-primary btn-sm">Request For Edit</a>
+									{% elif i.editable == 'Requested' %}
+									<span class="badge badge-success p-2">Edit Request Sent</span>
+									{% elif i.editable == 'Approved' %}
+									<a href="{% url 'update_loan' i.form_id %}" class="btn btn-primary btn-sm">
+										<i class="fas fa-edit"></i>
+									</a>
+									{% elif i.editable == 'Updated' %}
+									<span class="badge badge-success p-2">Update Successful</span>
+									{% elif i.editable == 'Not Approved' %}
+									<span class="badge badge-danger p-2">Edit Request Denied</span>
+									{% endif %}
+								</td>
+							</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		{% endif %}
+
+		{% if requested_list %}
+		<!-- Loan Requested -->
+		<div class="col-lg-12">
+			<div class="card mb-4">
+				<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+					<h6 class="m-0 font-weight-bold text-primary">Requested</h6>
+				</div>
+				<div class="table-responsive p-3">
+					<table class="table align-items-center table-flush table-hover" id="requested">
+						<thead class="thead-light">
+							<tr>
+								<th>Money Lender</th>
+								<th>Amount (BDT)</th>
+								<th>Requested Date</th>
+								<th>Return Date</th>
+								<th>Status</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tfoot>
+							<tr>
+								<th>Money Lender</th>
+								<th>Amount (BDT)</th>
+								<th>Requested Date</th>
+								<th>Return Date</th>
+								<th>Status</th>
+								<th>Action</th>
+							</tr>
+						</tfoot>
+						<tbody>
+							{% for i in requested_list %}
+							<tr>
+								<td>
+									<a href="{% url 'show_profile' i.money_lender.account_number %}">{{ i.money_lender|title }}</a>
+								</td>
+								<td>{{ i.amount }}</td>
+								<td>{{ i.created|date:"M d, Y" }}</td>
+								<td>{{ i.return_date|date:"M d, Y" }}</td>
+								<td>{{ i.status }}</td>
+								<td>
+									<a href="{% url 'loan_delete' i.form_id%}" class="btn btn-danger btn-sm">
+										<i class="fas fa-trash"></i>
+									</a>
+								</td>
+							{% endfor %}
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		{% endif %}
+
+		{% if rejected_list %}
+		<!-- Loan Rejected -->
+		<div class="col-lg-12">
+			<div class="card mb-4">
+				<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+					<h6 class="m-0 font-weight-bold text-primary">Rejected</h6>
+				</div>
+				<div class="table-responsive p-3">
+					<table class="table align-items-center table-flush table-hover" id="rejected">
+						<thead class="thead-light">
+							<tr>
+								<th>Money Lender</th>
+								<th>Amount (BDT)</th>
+								<th>Requested Date</th>
+								<th>Return Date</th>
+								<th>Status</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tfoot>
+							<tr>
+								<th>Money Lender</th>
+								<th>Amount (BDT)</th>
+								<th>Requested Date</th>
+								<th>Return Date</th>
+								<th>Status</th>
+								<th>Action</th>
+							</tr>
+						</tfoot>
+						<tbody>
+							{% for i in rejected_list %}
+							<tr>
+								<td>
+									<a href="{% url 'show_profile' i.money_lender.account_number %}">{{ i.money_lender|title }}</a>
+								</td>
+								<td>{{ i.amount }}</td>
+								<td>{{ i.created|date:"M d, Y" }}</td>
+								<td>{{ i.return_date|date:"M d, Y" }}</td>
+								<td>{{ i.status }}</td>
+								<td>
+									<span class="badge badge-danger p-2">Not Approved</span>
+								</td>
+							</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		{% endif %}
+
+	{% else %}
+	<div class="col-lg-12">
+		<div class="card mb-4">
+			<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+				<h6 class="m-0 font-weight-bold text-primary">You haven't send any loan request. You can send a new loan request by submitting the form below.</h6>
+			</div>
+			<div class="card-body">
+				<form method="POST">
+					<div class="row">
+						<div class="col-md-6">
+							{{ form.account_number|as_crispy_field }}
+						</div>
+						<div class="col-md-6">
+							{{ form.account_name|as_crispy_field }}
+						</div>
+						<div class="col-md-6">
+							{{ form.amount|as_crispy_field }}
+						</div>
+						<div class="col-md-6">
+							{{ form.return_date|as_crispy_field }}
+						</div>
+					</div>
+					<button type="submit" class="btn btn-primary">Request For Loan</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	{% endif %}
+</div>
+<!--Row-->
+
+
+{% endblock %}

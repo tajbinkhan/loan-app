@@ -1,0 +1,90 @@
+{% load static %}
+
+{% with request.resolver_match.url_name as url_name %}
+
+<!-- Sidebar -->
+<ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
+	<a
+		class="sidebar-brand d-flex align-items-center justify-content-center"
+		href="{% url 'dashboard' %}"
+	>
+		<div class="sidebar-brand-icon">
+			<img src="{% static 'img/logo/logo.png' %}" />
+		</div>
+		<div class="sidebar-brand-text mx-3">Loan App</div>
+	</a>
+	<hr class="sidebar-divider my-0" />
+	<li class="nav-item {% if url_name == 'dashboard' %}active{% endif %}">
+		<a class="nav-link" href="{% url 'dashboard' %}">
+			<i class="fas fa-fw fa-tachometer-alt"></i>
+			<span>Dashboard</span></a
+		>
+	</li>
+	<hr class="sidebar-divider" />
+	<div class="sidebar-heading">Loan Management</div>
+	<li class="nav-item {% if url_name == 'loan_form' or url_name == 'previous_user_list' or url_name == 'loan_requested' %}active{% endif %}">
+		<a
+			class="nav-link collapsed"
+			href="#"
+			data-toggle="collapse"
+			data-target="#collapseBootstrap"
+			aria-expanded="true"
+			aria-controls="collapseBootstrap"
+		>
+		<i class="fas fa-landmark"></i>
+			<span>Loan</span>
+		</a>
+		<div
+			id="collapseBootstrap"
+			class="collapse {% if url_name == 'loan_form' or url_name == 'previous_user_list' or url_name == 'loan_requested' %}show{% endif %}"
+			aria-labelledby="headingBootstrap"
+			data-parent="#accordionSidebar"
+		>
+			<div class="bg-white py-2 collapse-inner rounded">
+				<h6 class="collapse-header">Loan</h6>
+				<a class="collapse-item {% if url_name == 'loan_form' %}active{% endif %}" href="{% url 'loan_form' %}">Loan Form</a>
+				<a class="collapse-item {% if url_name == 'loan_requested' %}active{% endif %}" href="{% url 'loan_requested' %}">Loan Requested</a>
+				<a class="collapse-item {% if url_name == 'previous_user_list' %}active{% endif %}" href="{% url 'previous_user_list' %}">Previous Requested</a>
+			</div>
+		</div>
+	</li>
+	<hr class="sidebar-divider" />
+	<div class="sidebar-heading">Accounts & Profile</div>
+	<li class="nav-item {% if url_name == 'account_change_password' or url_name == 'account_set_password' or url_name == 'account_email' or url_name == 'profile' %}active{% endif %}">
+		<a
+			class="nav-link collapsed"
+			href="#"
+			data-toggle="collapse"
+			data-target="#collapsePage"
+			aria-expanded="true"
+			aria-controls="collapsePage"
+		>
+			<i class="fas fa-user-circle"></i>
+			<span>Account Details</span>
+		</a>
+		<div
+			id="collapsePage"
+			class="collapse {% if url_name == 'account_change_password' or url_name == 'account_set_password' or url_name == 'account_email' or url_name == 'profile' %}show{% endif %}"
+			aria-labelledby="headingPage"
+			data-parent="#accordionSidebar"
+		>
+			<div class="bg-white py-2 collapse-inner rounded">
+				<h6 class="collapse-header">Account Details</h6>
+				<a class="collapse-item {% if url_name == 'profile' %}active{% endif %}" href="{% url 'profile' %}">Profile</a>
+				<a class="collapse-item {% if url_name == 'account_change_password' or url_name == 'account_set_password' %}active{% endif %}" href="{% url 'account_change_password' %}">Change Password</a>
+				<a class="collapse-item {% if url_name == 'account_email' %}active{% endif %}" href="{% url 'account_email' %}">Change Email</a>
+			</div>
+		</div>
+	</li>
+	<li class="nav-item {% if url_name == 'socialaccount_connections' %}active{% endif %}">
+		<a class="nav-link" href="{% url 'socialaccount_connections' %}">
+			<i class="fas fa-share-alt"></i>
+			<span>Social Connection</span>
+		</a>
+	</li>
+	<hr class="sidebar-divider" />
+	<div class="version" id="version-ruangadmin"></div>
+</ul>
+<!-- Sidebar -->
+
+{% endwith %}

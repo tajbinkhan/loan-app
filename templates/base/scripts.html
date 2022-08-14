@@ -1,0 +1,91 @@
+{% load static %}
+
+<script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+<script src="{% static 'js/ruang-admin.min.js' %}"></script>
+<!-- Page level plugins -->
+<script src="{% static 'vendor/datatables/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'vendor/datatables/dataTables.bootstrap4.min.js' %}"></script>
+
+<!-- Page level custom scripts -->
+<script>
+	function copy_to_clipboard_account_number() {
+		var copyText = document.getElementById("copy_text_account_number");
+
+		copyText.select();
+		copyText.setSelectionRange(0, 99999);
+		navigator.clipboard.writeText(copyText.value);
+		console.log('ok');
+
+		var copy_text = document.getElementById("copy_account_number").innerHTML;
+		document.getElementById("copy_account_number").innerHTML = copy_text.replace("Copy", "Copied");
+	}
+
+	function copy_to_clipboard_name() {
+		var copyText = document.getElementById("copy_text_name");
+
+		copyText.select();
+		copyText.setSelectionRange(0, 99999);
+		navigator.clipboard.writeText(copyText.value);
+		console.log('ok');
+
+		var copy_text = document.getElementById("copy_username").innerHTML;
+		document.getElementById("copy_username").innerHTML = copy_text.replace("Copy", "Copied");
+	}
+
+	$(document).ready(function () {
+		$('#accepted').DataTable({
+			"lengthMenu": [ 5, 25, 50, 75, 100 ],
+			columnDefs: [
+				{ orderable: false, targets: 5 }
+			],
+				order: [[2, 'desc']]
+		});
+		$('#requested').DataTable({
+			"lengthMenu": [ 5, 25, 50, 75, 100 ],
+			columnDefs: [
+				{ orderable: false, targets: 5 }
+			],
+				order: [[2, 'desc']]
+		});
+		$('#rejected').DataTable({
+			"lengthMenu": [ 5, 25, 50, 75, 100 ],
+			columnDefs: [
+				{ orderable: false, targets: 5 }
+			],
+				order: [[2, 'desc']]
+		});
+		$('#previous_user_list').DataTable({
+			"lengthMenu": [ 5, 25, 50, 75, 100 ],
+			columnDefs: [
+				{ orderable: false, targets: 3 }
+			],
+				order: [[2, 'desc']]
+		});
+		$('#loan_request').DataTable({
+			"lengthMenu": [ 5, 25, 50, 75, 100 ],
+			columnDefs: [
+				{ orderable: false, targets: 5 }
+			],
+				order: [[2, 'desc']]
+		});
+		$('#loan_updated_request').DataTable({
+			"lengthMenu": [ 5, 25, 50, 75, 100 ],
+			columnDefs: [
+				{ orderable: false, targets: 5 }
+			],
+				order: [[2, 'desc']]
+		});
+		$('#social_account').DataTable({
+			searching: false,
+			paging: false,
+			ordering: false,
+		});
+		$('#email_account').DataTable({
+			searching: false,
+			paging: false,
+			ordering: false,
+		});
+	});
+</script>

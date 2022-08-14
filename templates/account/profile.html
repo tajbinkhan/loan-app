@@ -1,0 +1,53 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+
+<div class="card mb-4">
+	<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+		<h6 class="m-0 font-weight-bold text-primary">User Profile</h6>
+	</div>
+	<div class="card-body">
+		<div class="row mb-4">
+			<div class="col-lg-4">
+				<table class="table table-borderless">
+					<tbody>
+						<tr>
+							<th scope="row">Account Number</th>
+							<td>
+								<input type="text" readonly value="{{ user.account_number }}" id="copy_text_account_number">
+								<span onclick="copy_to_clipboard_account_number()" class="copy" id="copy_account_number">Copy</span>
+							</td>
+						</tr>
+						<tr>
+							<th scope="row">Account Name</th>
+							<td>
+								<input type="text" readonly value="{{ user.username }}" id="copy_text_name">
+								<span onclick="copy_to_clipboard_name()" class="copy" id="copy_username">Copy</span>
+							</td>
+						</tr>
+						<tr>
+							<th scope="row">Primary Email</th>
+							<td>{{ user.email }}</td>
+						</tr>
+						<tr>
+							<th scope="row">First Name</th>
+							<td>{{ user.first_name }}</td>
+						</tr>
+						<tr>
+							<th scope="row">Last Name</th>
+							<td>{{ user.last_name }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		{% if show %}
+		<a href="{% url 'update_profile' %}" class="btn btn-primary">Edit Profile</a>
+		{% endif %}
+	</div>
+</div>
+
+{% endblock %}

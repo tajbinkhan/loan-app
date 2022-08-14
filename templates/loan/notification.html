@@ -1,0 +1,137 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Notification{% endblock %}
+
+{% block content %}
+
+<div class="row">
+
+	{% if loan_requested or update_request %}
+		{% if loan_requested %}
+		<!-- Loan Request -->
+		<div class="col-lg-12">
+			<div class="card mb-4">
+				<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+					<h6 class="m-0 font-weight-bold text-primary">Loan Request</h6>
+				</div>
+				<div class="table-responsive p-3">
+					<table class="table align-items-center table-flush table-hover" id="loan_request">
+						<thead class="thead-light">
+							<tr>
+								<th>Money Lender</th>
+								<th>Amount (BDT)</th>
+								<th>Requested Date</th>
+								<th>Return Date</th>
+								<th>Status</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tfoot>
+							<tr>
+								<th>Money Lender</th>
+								<th>Amount (BDT)</th>
+								<th>Requested Date</th>
+								<th>Return Date</th>
+								<th>Status</th>
+								<th>Action</th>
+							</tr>
+						</tfoot>
+						<tbody>
+							{% for i in loan_requested %}
+							<tr>
+								<td>
+									<a href="">{{ i.user|title }}</a>
+								</td>
+								<td>{{ i.amount }}</td>
+								<td>{{ i.created|date:"M d, Y" }}</td>
+								<td>{{ i.return_date|date:"M d, Y" }}</td>
+								<td>{{ i.status }}</td>
+								<td>
+									<a href="{% url 'notification_approve' i.form_id%}" class="btn btn-success btn-sm">
+										<i class="fas fa-check"></i>
+									</a>
+									<a href="{% url 'notification_deny' i.form_id %}" class="btn btn-danger btn-sm">
+										<i class="fas fa-times"></i>
+									</a>
+								</td>
+							</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+
+		{% endif %}
+
+		{% if update_request %}
+		<!-- Loan Update Request -->
+		<div class="col-lg-12">
+			<div class="card mb-4">
+				<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+					<h6 class="m-0 font-weight-bold text-primary">Loan Update Request</h6>
+				</div>
+				<div class="table-responsive p-3">
+					<table class="table align-items-center table-flush table-hover" id="loan_updated_request">
+						<thead class="thead-light">
+							<tr>
+								<th>Money Lender</th>
+								<th>Amount (BDT)</th>
+								<th>Requested Date</th>
+								<th>Return Date</th>
+								<th>Status</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tfoot>
+							<tr>
+								<th>Money Lender</th>
+								<th>Amount (BDT)</th>
+								<th>Requested Date</th>
+								<th>Return Date</th>
+								<th>Status</th>
+								<th>Action</th>
+							</tr>
+						</tfoot>
+						<tbody>
+							{% for i in update_request %}
+							<tr>
+								<td>
+									<a href="{% url 'show_profile' i.user.account_number %}">{{ i.user|title }}</a>
+								</td>
+								<td>{{ i.amount }}</td>
+								<td>{{ i.created|date:"M d, Y" }}</td>
+								<td>{{ i.return_date|date:"M d, Y" }}</td>
+								<td>{{ i.status }}</td>
+								<td>
+									<a href="{% url 'request_for_update_approve' i.form_id %}" class="btn btn-success btn-sm">
+										<i class="fas fa-check"></i>
+									</a>
+									<a href="{% url 'request_for_update_deny' i.form_id %}" class="btn btn-danger btn-sm">
+										<i class="fas fa-times"></i>
+									</a>
+								</td>
+							</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+
+		{% endif %}
+
+	{% else %}
+	<div class="col-lg-12">
+		<div class="card mb-4">
+			<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+				<h6 class="m-0 font-weight-bold text-primary">No new notification</h6>
+			</div>
+			<div class="card-body"></div>
+		</div>
+	</div>
+	{% endif %}
+
+</div>
+
+{% endblock %}

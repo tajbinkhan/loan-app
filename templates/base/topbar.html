@@ -1,0 +1,114 @@
+{% load static %}
+
+<!-- TopBar -->
+<nav class="navbar navbar-expand navbar-light bg-navbar topbar mb-4 static-top">
+	<button id="sidebarToggleTop" class="btn btn-link rounded-circle mr-3">
+		<i class="fa fa-bars"></i>
+	</button>
+	<ul class="navbar-nav ml-auto">
+		<li class="nav-item dropdown no-arrow mx-1">
+			<a
+				class="nav-link dropdown-toggle"
+				href="#"
+				id="alertsDropdown"
+				role="button"
+				data-toggle="dropdown"
+				aria-haspopup="true"
+				aria-expanded="false"
+			>
+				<i class="fas fa-bell fa-fw"></i>
+				{% if show_notification %}
+				<span class="badge badge-danger badge-counter">{{ count_notification }}</span>
+				{% endif %}
+			</a>
+			<div
+				class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+				aria-labelledby="alertsDropdown"
+			>
+				<h6 class="dropdown-header">Notifications Center</h6>
+				{% if loan_requested or update_request %}
+					{% for i in loan %}
+						{% if i.status == 'Pending' and i.editable == 'Not Applied' %}
+						<a class="dropdown-item d-flex align-items-center" href="{% url 'notification' %}">
+							<div class="mr-3">
+								<div class="icon-circle bg-success">
+									<i class="fas fa-donate text-white"></i>
+								</div>
+							</div>
+							<div>
+								<div class="small text-gray-500">{{ i.updated|date:"M d, Y" }}</div>
+								<span class="font-weight-bold"
+								>{{ i.user|title }} ({{ i.user.account_number }}) was requested loan from you.</span>
+							</div>
+						</a>
+						{% elif i.status == 'Accepted' and i.editable == 'Requested' %}
+						<a class="dropdown-item d-flex align-items-center" href="{% url 'notification' %}">
+							<div class="mr-3">
+								<div class="icon-circle bg-warning">
+									<i class="fas fa-edit text-white"></i>
+								</div>
+							</div>
+							<div>
+								<div class="small text-gray-500">{{ i.updated|date:"M d, Y" }}</div>
+								<span class="font-weight-bold"
+								>{{ i.user|title }} ({{ i.user.account_number }}) wanted to change something in the loan.</span>
+							</div>
+						</a>
+						{% endif %}
+					{% endfor %}
+					<a class="dropdown-item text-center small text-gray-500" href="{% url 'notification' %}"
+						>Show All Notifications</a>
+				{% else %}
+				<a class="dropdown-item text-center small text-gray-500" href="{% url 'notification' %}"
+					>Go To Notification Page</a
+				>
+				{% endif %}
+			</div>
+		</li>
+		<div class="topbar-divider d-none d-sm-block"></div>
+		<li class="nav-item dropdown no-arrow">
+			<a
+				class="nav-link dropdown-toggle"
+				href="#"
+				id="userDropdown"
+				role="button"
+				data-toggle="dropdown"
+				aria-haspopup="true"
+				aria-expanded="false"
+			>
+			{% if request.user.profile_pic %}
+				<img class="img-profile rounded-circle" src="{{ user.profile_pic.url }}" style="max-width: 60px"/>
+			{% else %}
+				<img class="img-profile rounded-circle" src="{% static 'img/boy.png' %}" style="max-width: 60px"/>
+			{% endif %}
+				<span class="ml-2 d-none d-lg-inline text-white small"
+					>{{ request.user.username }}</span
+				>
+			</a>
+			<div
+				class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+				aria-labelledby="userDropdown"
+			>
+				<a class="dropdown-item" href="{% url 'profile' %}">
+					<i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+					Profile
+				</a>
+				<a class="dropdown-item" href="{% url 'update_profile' %}">
+					<i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+					Update Profile
+				</a>
+				<div class="dropdown-divider"></div>
+				<a
+					class="dropdown-item"
+					href="javascript:void(0);"
+					data-toggle="modal"
+					data-target="#logoutModal"
+				>
+					<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+					Logout
+				</a>
+			</div>
+		</li>
+	</ul>
+</nav>
+<!-- Topbar -->

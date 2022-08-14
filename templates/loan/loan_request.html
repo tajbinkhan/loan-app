@@ -1,0 +1,36 @@
+{% extends 'base/base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}Loan Request Form{% endblock %}
+
+{% block content %}
+
+<!-- Loan Request Form -->
+<div class="card mb-4">
+	<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+		<h6 class="m-0 font-weight-bold text-primary">You can request loan from others whom you know. You just need account number and account name (their username) to give a loan request.</h6>
+	</div>
+	<div class="card-body">
+		<form method="POST">
+			{% csrf_token %}
+			<div class="row">
+				<div class="col-md-6">
+					{{ form.account_number|as_crispy_field }}
+				</div>
+				<div class="col-md-6">
+					{{ form.account_name|as_crispy_field }}
+				</div>
+				<div class="col-md-6">
+					{{ form.amount|as_crispy_field }}
+				</div>
+				<div class="col-md-6">
+					{{ form.return_date|as_crispy_field }}
+				</div>
+			</div>
+			<button type="submit" class="btn btn-primary">Request For Loan</button>
+		</form>
+	</div>
+</div>
+
+{% endblock %}

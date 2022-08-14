@@ -1,0 +1,22 @@
+{% extends "base/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}Update Profile{% endblock %}
+
+{% block content %}
+
+<div class="card mb-4">
+	<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+		<h6 class="m-0 font-weight-bold text-primary">Update Your Profile</h6>
+	</div>
+	<div class="card-body">
+		<form action="{% url 'update_profile' %}" method="POST" enctype="multipart/form-data">
+			{% csrf_token %}
+			{{ form|crispy }}
+			<button class="btn btn-primary">Update</button>
+			<a href="{% url 'account_email' %}" class="btn btn-danger">Change Email</a>
+		</form>
+	</div>
+</div>
+
+{% endblock %}

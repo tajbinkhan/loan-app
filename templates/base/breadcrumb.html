@@ -1,0 +1,79 @@
+{% with request.resolver_match.url_name as url_name %}
+
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+	{% if url_name == 'dashboard' %}
+	<h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+	{% elif url_name == 'loan_form' %}
+	<h1 class="h3 mb-0 text-gray-800">Loan Request Form</h1>
+	{% elif url_name == 'previous_user_list' %}
+	<h1 class="h3 mb-0 text-gray-800">Previous User List</h1>
+	{% elif url_name == 'loan_request_again' %}
+	<h1 class="h3 mb-0 text-gray-800">Loan Re-request Form</h1>
+	{% elif url_name == 'notification' %}
+	<h1 class="h3 mb-0 text-gray-800">Notification</h1>
+	{% elif url_name == 'loan_requested' %}
+	<h1 class="h3 mb-0 text-gray-800">Loan Requested</h1>
+	{% elif url_name == 'update_loan' %}
+	<h1 class="h3 mb-0 text-gray-800">Update Loan Form</h1>
+	{% elif url_name == 'socialaccount_connections' %}
+	<h1 class="h3 mb-0 text-gray-800">Social Account Connections</h1>
+	{% elif url_name == 'account_email' %}
+	<h1 class="h3 mb-0 text-gray-800">Email Addresses</h1>
+	{% elif url_name == 'account_change_password' %}
+	<h1 class="h3 mb-0 text-gray-800">Change Password</h1>
+	{% elif url_name == 'account_set_password' %}
+	<h1 class="h3 mb-0 text-gray-800">Set Password</h1>
+	{% elif url_name == 'profile' %}
+	<h1 class="h3 mb-0 text-gray-800">Profile</h1>
+	{% elif url_name == 'update_profile' %}
+	<h1 class="h3 mb-0 text-gray-800">Update Profile</h1>
+	{% elif url_name == 'show_profile' %}
+	<h1 class="h3 mb-0 text-gray-800">{{ user.username|title }}'s Profile</h1>
+	{% endif %}
+	<ol class="breadcrumb">
+		{% if url_name == 'dashboard' %}
+		<li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+		{% elif url_name == 'loan_form' %}
+		<li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+		<li class="breadcrumb-item active" aria-current="page">Loan Request Form</li>
+		{% elif url_name == 'previous_user_list' %}
+		<li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+		<li class="breadcrumb-item active" aria-current="page">Previous User List</li>
+		{% elif url_name == 'loan_request_again' %}
+		<li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+		<li class="breadcrumb-item active" aria-current="page">Loan Re-request Form</li>
+		{% elif url_name == 'notification' %}
+		<li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+		<li class="breadcrumb-item active" aria-current="page">Notification</li>
+		{% elif url_name == 'loan_requested' %}
+		<li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+		<li class="breadcrumb-item active" aria-current="page">Loan Requested</li>
+		{% elif url_name == 'update_loan' %}
+		<li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+		<li class="breadcrumb-item active" aria-current="page">Update Loan Form</li>
+		{% elif url_name == 'socialaccount_connections' %}
+		<li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+		<li class="breadcrumb-item active" aria-current="page">Social Account Connections</li>
+		{% elif url_name == 'account_email' %}
+		<li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+		<li class="breadcrumb-item active" aria-current="page">Email Addresses</li>
+		{% elif url_name == 'account_change_password' %}
+		<li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+		<li class="breadcrumb-item active" aria-current="page">Change Password</li>
+		{% elif url_name == 'account_set_password' %}
+		<li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+		<li class="breadcrumb-item active" aria-current="page">Set Password</li>
+		{% elif url_name == 'profile' %}
+		<li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+		<li class="breadcrumb-item active" aria-current="page">Profile</li>
+		{% elif url_name == 'update_profile' %}
+		<li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+		<li class="breadcrumb-item active" aria-current="page">Update Profile</li>
+		{% elif url_name == 'show_profile' %}
+		<li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+		<li class="breadcrumb-item active" aria-current="page">{{ user.username|title }}'s Profile</li>
+		{% endif %}
+	</ol>
+</div>
+
+{% endwith %}

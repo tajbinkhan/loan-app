@@ -1,0 +1,79 @@
+{% extends 'base/base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}Previous User List{% endblock %}
+
+{% block content %}
+
+<div class="row">
+	<!-- Previous User List -->
+	<div class="col-lg-12">
+		<div class="card mb-4">
+			{% if previous_user_list %}
+			<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+				<h6 class="m-0 font-weight-bold text-primary">Previous User List</h6>
+			</div>
+			<div class="table-responsive p-3">
+				<table class="table align-items-center table-flush table-hover" id="previous_user_list">
+					<thead class="thead-light">
+						<tr>
+							<th>Money Lender</th>
+							<th>Account Number</th>
+							<th>Requested Date</th>
+							<th>Action</th>
+						</tr>
+					</thead>
+					<tfoot>
+						<tr>
+							<th>Money Lender</th>
+							<th>Account Number</th>
+							<th>Requested Date</th>
+							<th>Action</th>
+						</tr>
+					</tfoot>
+					<tbody>
+						{% for i in previous_user_list %}
+						<tr>
+							<td>
+								<a href="{% url 'show_profile' i.money_lender.account_number %}">{{ i.money_lender.username|title }}</a>
+							</td>
+							<td>{{ i.money_lender.account_number }}</td>
+							<td>{{ i.created|date:"M d, Y" }}</td>
+							<td>
+								<a href="{% url 'loan_request_again' i.money_lender.account_number %}" class="btn btn-primary">Request Again</a>
+							</td>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+			{% else %}
+			<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+				<h6 class="m-0 font-weight-bold text-primary">You haven't send any loan request. You can send a new loan request by submitting the form below.</h6>
+			</div>
+			<div class="card-body">
+				<form method="POST">
+					<div class="row">
+						<div class="col-md-6">
+							{{ form.account_number|as_crispy_field }}
+						</div>
+						<div class="col-md-6">
+							{{ form.account_name|as_crispy_field }}
+						</div>
+						<div class="col-md-6">
+							{{ form.amount|as_crispy_field }}
+						</div>
+						<div class="col-md-6">
+							{{ form.return_date|as_crispy_field }}
+						</div>
+					</div>
+					<button type="submit" class="btn btn-primary">Request For Loan</button>
+				</form>
+			</div>
+			{% endif %}
+		</div>
+	</div>
+</div>
+
+{% endblock %}

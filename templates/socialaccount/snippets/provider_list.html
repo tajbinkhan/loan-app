@@ -1,0 +1,35 @@
+{% load socialaccount %}
+
+{% get_providers as socialaccount_providers %}
+
+{% for provider in socialaccount_providers %}
+{% if provider.id == "openid" %}
+{% for brand in provider.get_brands %}
+<li>
+	<a title="{{brand.name}}"
+		 class="socialaccount_provider {{provider.id}} {{brand.id}}"
+		 href="{% provider_login_url provider.id openid=brand.openid_url process=process %}"
+		 >{{brand.name}}</a>
+</li>
+{% endfor %}
+{% endif %}
+{% if provider.name == 'Facebook' %}
+<a href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}" class="btn btn-facebook btn-block" style="border: 1px solid #3b5998">
+	<i class="fab fa-facebook-f fa-fw"></i>
+	{% if request.resolver_match.url_name == 'account_signup' %}
+	Signin with Facebook
+	{% else %}
+	Login with Facebook
+	{% endif %}
+</a>
+{% elif provider.name == 'Google' %}
+<a href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}" class="btn btn-google btn-block">
+	<i class="fab fa-google fa-fw"></i>
+	{% if request.resolver_match.url_name == 'account_signup' %}
+	Signin with Google
+	{% else %}
+	Login with Google
+	{% endif %}
+</a>
+{% endif %}
+{% endfor %}

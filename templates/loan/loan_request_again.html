@@ -1,0 +1,69 @@
+{% extends 'base/base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}
+
+{% if request.resolver_match.url_name == 'update_loan' %}
+Update Loan Form
+{% else %}
+Loan Re-request From
+{% endif %}
+
+{% endblock %}
+
+{% block content %}
+
+<!-- Loan Request Form -->
+<div class="card mb-4">
+
+	{% if previous_user_list %}
+	<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+		<h6 class="m-0 font-weight-bold text-primary">You are eligible to request again.</h6>
+	</div>
+	<div class="card-body">
+		<form method="POST">
+			{% csrf_token %}
+			<div class="row">
+				<div class="col-md-6">
+					{{ form.amount|as_crispy_field }}
+				</div>
+				<div class="col-md-6">
+					{{ form.return_date|as_crispy_field }}
+				</div>
+			</div>
+			<button type="submit" class="btn btn-primary">Request For Loan</button>
+		</form>
+	</div>
+
+	{% elif request.resolver_match.url_name == 'update_loan' %}
+
+	<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+		<h6 class="m-0 font-weight-bold text-primary">Update Loan Form</h6>
+	</div>
+	<div class="card-body">
+		<form method="POST">
+			{% csrf_token %}
+			<div class="row">
+				<div class="col-md-6">
+					{{ form.amount|as_crispy_field }}
+				</div>
+				<div class="col-md-6">
+					{{ form.return_date|as_crispy_field }}
+				</div>
+			</div>
+			<button type="submit" class="btn btn-primary">Update</button>
+		</form>
+	</div>
+
+	{% else %}
+
+	<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+		<h6 class="m-0 font-weight-bold text-primary">Sorry! You are not eligible to request loan from user. First, you need to request loan by filling this <a href="{% url 'loan_form' %}">form</a>. Then you will be eligible to request again.</h6>
+	</div>
+
+	{% endif %}
+
+</div>
+
+{% endblock %}

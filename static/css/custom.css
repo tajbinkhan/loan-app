@@ -1,0 +1,18 @@
+#copy_text_account_number {
+	border: none;
+	outline: none;
+}
+
+#copy_text_name {
+	border: none;
+	outline: none;
+}
+
+span.copy {
+	padding: 0px 10px;
+	border-radius: 3px;
+	background: #a7a7a7;
+	color: white;
+	cursor: pointer;
+	padding-bottom: 3px;
+}
