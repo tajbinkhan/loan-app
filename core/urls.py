@@ -4,6 +4,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.views.generic import RedirectView
 from django.urls import reverse_lazy
+from . import views
 
 urlpatterns = [
 	path('admin/', admin.site.urls),
@@ -11,6 +12,8 @@ urlpatterns = [
 	path('accounts/', include('allauth.urls')),
 	path('', include('loan.urls')),
 	path('', include('accounts_profile.urls')),
+	path('privacy-policy/', views.privacy_policy, name='privacy_policy'),
+	path('terms-of-services/', views.terms_of_services, name='terms_of_services'),
 ]
 
 if settings.DEBUG:
