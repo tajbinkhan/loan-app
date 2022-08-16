@@ -1,0 +1,14 @@
+{% extends 'account/base.html' %}
+{% block head_title %}404 Not Found{% endblock %}
+
+{% block content %}
+
+<div class="text-center">
+	<h1 class="h4 text-gray-900 mb-4">Not Found</h1>
+</div>
+<hr>
+
+<p>The page you are looking for, can not be found.</p>
+<a href="{% url 'dashboard' %}" class="btn btn-primary text-center">Go To Dashboard</a>
+
+{% endblock %}
