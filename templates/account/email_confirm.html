@@ -12,6 +12,8 @@
 </div>
 <hr>
 
+{% include 'base/message.html' %}
+
 {% if confirmation %}
 
 {% user_display confirmation.email_address.user as user_display %}

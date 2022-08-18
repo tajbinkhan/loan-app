@@ -12,6 +12,8 @@
 </div>
 <hr>
 
+{% include 'base/message.html' %}
+
 {% get_providers as socialaccount_providers %}
 
 <form class="user" id="signup_form" method="post" action="{% url 'account_signup' %}">

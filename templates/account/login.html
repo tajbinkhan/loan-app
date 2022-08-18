@@ -12,6 +12,8 @@
 </div>
 <hr>
 
+{% include 'base/message.html' %}
+
 {% get_providers as socialaccount_providers %}
 
 {% if form.non_field_errors %}
