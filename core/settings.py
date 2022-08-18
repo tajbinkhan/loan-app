@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 from decouple import config
+from .ckeditor_configs import CKEDITOR_CONFIGS
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -48,14 +49,16 @@ INSTALLED_APPS = [
 	# My Apps
 	'loan.apps.LoanConfig',
 	'accounts_profile.apps.AccountsProfileConfig',
+	'site_settings.apps.SiteSettingsConfig',
 
 	# Installed Apps
-	"crispy_forms",
+	'crispy_forms',
 	'allauth',
 	'allauth.account',
 	'allauth.socialaccount',
 	'allauth.socialaccount.providers.facebook',
 	'allauth.socialaccount.providers.google',
+	'ckeditor',
 ]
 
 MIDDLEWARE = [
@@ -177,3 +180,5 @@ EMAIL_PORT = config('EMAIL_PORT')
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+
+CKEDITOR_CONFIGS = CKEDITOR_CONFIGS

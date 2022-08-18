@@ -30,7 +30,7 @@ class Loan(models.Model):
 	amount = models.PositiveIntegerField(verbose_name='Loan Amount')
 	return_date = models.DateField(default=timezone.now, validators=[validate_date], verbose_name='Return Date')
 	status = models.CharField(max_length=8, choices=STATUS, default='Pending')
-	editable = models.CharField(max_length=14, choices=EDITABLE_STATUS, default='Not Applicable')
+	editable = models.CharField(max_length=14, choices=EDITABLE_STATUS, default='Not Applied')
 	updated = models.DateField(auto_now=True, verbose_name='Updated Date')
 	created = models.DateField(auto_now_add=True, verbose_name='Requested Date')
 
