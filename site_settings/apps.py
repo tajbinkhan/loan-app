@@ -5,3 +5,6 @@ class SiteSettingsConfig(AppConfig):
 	default_auto_field = 'django.db.models.BigAutoField'
 	name = 'site_settings'
 	verbose_name = 'Site settings'
+
+	def ready(self):
+		import site_settings.signals

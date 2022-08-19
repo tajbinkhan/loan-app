@@ -16,6 +16,9 @@ class EmailContent(models.Model):
 		('New Loan Request', 'New Loan Request'),
 		('New Loan Request Approved', 'New Loan Request Approved'),
 		('New Loan Request Rejected', 'New Loan Request Rejected'),
+		('Loan Edit Request', 'Loan Edit Request'),
+		('Loan Edit Request Approved', 'Loan Edit Request Approved'),
+		('Loan Edit Request Rejected', 'Loan Edit Request Rejected'),
 	]
 	subject = models.CharField(max_length=50)
 	plain_text_html = models.TextField(verbose_name='Plain Text HTML')
