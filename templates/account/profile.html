@@ -32,6 +32,24 @@
 							<th scope="row">Email</th>
 							<td>{{ user.email }}</td>
 						</tr>
+						{% if show %}
+						<tr>
+							<th scope="row">Approved</th>
+							<td>{{ accepted }}</td>
+						</tr>
+						<tr>
+							<th scope="row">Requested</th>
+							<td>{{ requested }}</td>
+						</tr>
+						<tr>
+							<th scope="row">Rejected</th>
+							<td>{{ rejected }}</td>
+						</tr>
+						<tr>
+							<th scope="row">Given</th>
+							<td>{{ given }}</td>
+						</tr>
+						{% endif %}
 					</tbody>
 				</table>
 			</div>

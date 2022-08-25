@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import UserUpdateModelForm
 from .models import User
 from django.contrib import messages
+from loan.models import Loan
 
 # Create your views here.
 @login_required
@@ -10,9 +11,17 @@ def profile(request):
 	template_name = 'account/profile.html'
 	show = True
 	user = User.objects.get(username=request.user.username)
+	accepted = Loan.objects.filter(user=request.user, status='Accepted').count()
+	requested = Loan.objects.filter(user=request.user, status='Pending').count()
+	rejected = Loan.objects.filter(user=request.user, status='Rejected').count()
+	given = Loan.objects.filter(money_lender=request.user, status='Accepted').count()
 	context = {
 		'user': user,
-		'show': show
+		'show': show,
+		'accepted': accepted,
+		'requested': requested,
+		'rejected': rejected,
+		'given': given,
 	}
 	return render(request, template_name, context)
 

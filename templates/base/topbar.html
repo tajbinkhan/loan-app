@@ -80,7 +80,7 @@
 				aria-expanded="false"
 			>
 			{% if request.user.profile_pic %}
-				<img class="img-profile rounded-circle" src="{{ user.profile_pic.url }}" style="max-width: 60px"/>
+				<img class="img-profile rounded-circle" src="{{ request.user.profile_pic.url }}" style="max-width: 60px"/>
 			{% else %}
 				<img class="img-profile rounded-circle" src="{% static 'img/boy.png' %}" style="max-width: 60px"/>
 			{% endif %}
@@ -100,7 +100,7 @@
 					<i class="fas fa-id-card mr-2 text-gray-400"></i>
 					Update Profile
 				</a>
-				{% if user.is_superuser %}
+				{% if request.user.is_superuser %}
 				<a class="dropdown-item" href="/admin/" target="_blank">
 					<i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
 					Admin Panel
