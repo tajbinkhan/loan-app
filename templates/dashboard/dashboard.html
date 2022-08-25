@@ -1,5 +1,6 @@
 {% extends 'base/base.html' %}
 {% load crispy_forms_tags %}
+{% load humanize %}
 {% block title %}Dashboard{% endblock %}
 
 {% block content %}
@@ -44,7 +45,7 @@
 								<td>
 									<a href="{% url 'show_profile' i.money_lender.account_number %}">{{ i.money_lender|title }}</a>
 								</td>
-								<td>{{ i.amount }}</td>
+								<td>{{ i.amount|intcomma }}</td>
 								<td>{{ i.created|date:"M d, Y" }}</td>
 								<td>{{ i.return_date|date:"M d, Y" }}</td>
 								<td>{{ i.status }}</td>
@@ -65,6 +66,18 @@
 								</td>
 							</tr>
 							{% endfor %}
+							<tr>
+								<td>
+									<strong>Total</strong>
+								</td>
+								<td>
+									<strong>{{ accepted_list_total|intcomma }}</strong>
+								</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
 						</tbody>
 					</table>
 				</div>
@@ -107,7 +120,7 @@
 								<td>
 									<a href="{% url 'show_profile' i.money_lender.account_number %}">{{ i.money_lender|title }}</a>
 								</td>
-								<td>{{ i.amount }}</td>
+								<td>{{ i.amount|intcomma }}</td>
 								<td>{{ i.created|date:"M d, Y" }}</td>
 								<td>{{ i.return_date|date:"M d, Y" }}</td>
 								<td>{{ i.status }}</td>
@@ -116,7 +129,19 @@
 										<i class="fas fa-trash"></i>
 									</a>
 								</td>
+							</tr>
 							{% endfor %}
+							<tr>
+								<td>
+									<strong>Total</strong>
+								</td>
+								<td>
+									<strong>{{ requested_list_total|intcomma }}</strong>
+								</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
 							</tr>
 						</tbody>
 					</table>
@@ -160,7 +185,7 @@
 								<td>
 									<a href="{% url 'show_profile' i.money_lender.account_number %}">{{ i.money_lender|title }}</a>
 								</td>
-								<td>{{ i.amount }}</td>
+								<td>{{ i.amount|intcomma }}</td>
 								<td>{{ i.created|date:"M d, Y" }}</td>
 								<td>{{ i.return_date|date:"M d, Y" }}</td>
 								<td>{{ i.status }}</td>
@@ -169,6 +194,18 @@
 								</td>
 							</tr>
 							{% endfor %}
+							<tr>
+								<td>
+									<strong>Total</strong>
+								</td>
+								<td>
+									<strong>{{ rejected_list_total|intcomma }}</strong>
+								</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
 						</tbody>
 					</table>
 				</div>

@@ -9,9 +9,23 @@ from django.contrib.auth.decorators import login_required
 @login_required
 def dashboard(request):
 	template_name = 'dashboard/dashboard.html'
+	accepted_list_total = 0
+	requested_list_total = 0
+	rejected_list_total = 0
+
 	accepted_list = Loan.objects.filter(user=request.user, status='Accepted')
 	requested_list = Loan.objects.filter(user=request.user, status='Pending')
 	rejected_list = Loan.objects.filter(user=request.user, status='Rejected')
+
+	for i in accepted_list:
+		accepted_list_total = accepted_list_total + int(i.amount)
+
+	for i in requested_list:
+		requested_list_total = requested_list_total + int(i.amount)
+
+	for i in rejected_list:
+		rejected_list_total = rejected_list_total + int(i.amount)
+
 	form = LoanForm()
 	if request.method == 'POST':
 		form = LoanForm(request.POST or None)
@@ -33,15 +47,22 @@ def dashboard(request):
 		'requested_list': requested_list,
 		'rejected_list': rejected_list,
 		'accepted_list': accepted_list,
+		'accepted_list_total': accepted_list_total,
+		'requested_list_total': requested_list_total,
+		'rejected_list_total': rejected_list_total,
 	}
 	return render(request, template_name, context)
 
 @login_required
 def loan_requested(request):
 	template_name = 'loan/loan_requested.html'
+	loan_requested_list_total = 0
 	loan_requested = Loan.objects.filter(money_lender=request.user, status='Accepted')
+	for i in loan_requested:
+		loan_requested_list_total = loan_requested_list_total + int(i.amount)
 	context = {
-		'loan_requested': loan_requested
+		'loan_requested': loan_requested,
+		'loan_requested_list_total': loan_requested_list_total,
 	}
 	return render(request, template_name, context)
 
@@ -128,30 +149,46 @@ def loan_request_again(request, account_number):
 def update_loan(request, form_id):
 	template_name = 'loan/loan_request_again.html'
 	loan = get_object_or_404(Loan, form_id=form_id)
-	if request.method == 'POST':
-		form = LoanUpdateModelForm(request.POST, instance=loan)
-		if form.is_valid():
-			form.save()
-			loan.editable = 'Updated'
-			loan.save()
-			messages.info(request, 'Requested Loan Successfully Updated!')
-			return redirect('dashboard')
+	form = LoanUpdateModelForm()
+	if loan.editable == 'Approved':
+		if request.method == 'POST':
+			form = LoanUpdateModelForm(request.POST, instance=loan)
+			if form.is_valid():
+				form.save()
+				loan.editable = 'Updated'
+				loan.save()
+				messages.info(request, 'Requested Loan Successfully Updated!')
+				return redirect('dashboard')
+			else:
+				messages.error(request, 'Something went wrong. Please try again!!!')
 		else:
-			messages.error(request, 'Something went wrong. Please try again!!!')
+			form = LoanUpdateModelForm(instance=loan)
 	else:
-		form = LoanUpdateModelForm(instance=loan)
+		not_eligible = "You're not eligible to update your loan."
 	context = {
-		'form': form
+		'form': form,
+		'not_eligible': not_eligible
 	}
 	return render(request, template_name, context)
 
 def notification(request):
 	template_name = 'loan/notification.html'
+	loan_requested_total = 0
+	update_request_total = 0
 	loan_requested = Loan.objects.filter(money_lender=request.user, status='Pending', editable='Not Applied')
 	update_request = Loan.objects.filter(money_lender=request.user, status='Accepted', editable='Requested')
+
+	for i in loan_requested:
+		loan_requested_total = loan_requested_total + int(i.amount)
+
+	for i in update_request:
+		update_request_total = update_request_total + int(i.amount)
+
 	context = {
 		'loan_requested': loan_requested,
-		'update_request': update_request
+		'update_request': update_request,
+		'loan_requested_total': loan_requested_total,
+		'update_request_total': update_request_total,
 	}
 	return render(request, template_name, context)
 

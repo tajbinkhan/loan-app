@@ -1,5 +1,5 @@
 {% extends 'base/base.html' %}
-
+{% load humanize %}
 {% block title %}Notification{% endblock %}
 
 {% block content %}
@@ -42,7 +42,7 @@
 								<td>
 									<a href="">{{ i.user|title }}</a>
 								</td>
-								<td>{{ i.amount }}</td>
+								<td>{{ i.amount|intcomma }}</td>
 								<td>{{ i.created|date:"M d, Y" }}</td>
 								<td>{{ i.return_date|date:"M d, Y" }}</td>
 								<td>{{ i.status }}</td>
@@ -56,6 +56,18 @@
 								</td>
 							</tr>
 							{% endfor %}
+							<tr>
+								<td>
+									<strong>Total</strong>
+								</td>
+								<td>
+									<strong>{{ loan_requested_total|intcomma }}</strong>
+								</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
 						</tbody>
 					</table>
 				</div>
@@ -99,7 +111,7 @@
 								<td>
 									<a href="{% url 'show_profile' i.user.account_number %}">{{ i.user|title }}</a>
 								</td>
-								<td>{{ i.amount }}</td>
+								<td>{{ i.amount|intcomma }}</td>
 								<td>{{ i.created|date:"M d, Y" }}</td>
 								<td>{{ i.return_date|date:"M d, Y" }}</td>
 								<td>{{ i.status }}</td>
@@ -113,6 +125,18 @@
 								</td>
 							</tr>
 							{% endfor %}
+							<tr>
+								<td>
+									<strong>Total</strong>
+								</td>
+								<td>
+									<strong>{{ update_request_total|intcomma }}</strong>
+								</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
 						</tbody>
 					</table>
 				</div>

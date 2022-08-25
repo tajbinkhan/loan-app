@@ -10,12 +10,12 @@ def notification(request):
 	return context
 
 def count(request):
-	loan_requested = None
+	loan_request = None
 	update_request = None
 	if request.user.is_authenticated:
-		loan_requested = Loan.objects.filter(money_lender=request.user, status='Pending', editable='Not Applied')
+		loan_request = Loan.objects.filter(money_lender=request.user, status='Pending', editable='Not Applied')
 		update_request = Loan.objects.filter(money_lender=request.user, status='Accepted', editable='Requested')
-		count_notification = loan_requested.count() + update_request.count()
+		count_notification = loan_request.count() + update_request.count()
 		show_notification = True
 		if count_notification == 0:
 			show_notification = False
@@ -27,7 +27,7 @@ def count(request):
 	context = {
 		'count_notification': count_notification,
 		'show_notification': show_notification,
-		'loan_requested': loan_requested,
+		'loan_request': loan_request,
 		'update_request': update_request,
 	}
 	return context

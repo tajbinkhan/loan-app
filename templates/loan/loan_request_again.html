@@ -38,6 +38,8 @@ Loan Re-request From
 
 	{% elif request.resolver_match.url_name == 'update_loan' %}
 
+	{% if loan.editable == 'Approved' %}
+
 	<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 		<h6 class="m-0 font-weight-bold text-primary">Update Loan Form</h6>
 	</div>
@@ -55,6 +57,17 @@ Loan Re-request From
 			<button type="submit" class="btn btn-primary">Update</button>
 		</form>
 	</div>
+
+	{% else %}
+
+	<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+		<h6 class="m-0 font-weight-bold text-primary">Not Eligible</h6>
+	</div>
+	<div class="card-body">
+		<h4>{{ not_eligible }}</h4>
+	</div>
+
+	{% endif %}
 
 	{% else %}
 

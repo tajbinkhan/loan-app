@@ -26,9 +26,9 @@
 				aria-labelledby="alertsDropdown"
 			>
 				<h6 class="dropdown-header">Notifications Center</h6>
-				{% if loan_requested or update_request %}
-					{% for i in loan %}
-						{% if i.status == 'Pending' and i.editable == 'Not Applied' %}
+				{% if loan_request or update_request %}
+					{% if loan_request %}
+						{% for i in loan_request %}
 						<a class="dropdown-item d-flex align-items-center" href="{% url 'notification' %}">
 							<div class="mr-3">
 								<div class="icon-circle bg-success">
@@ -41,7 +41,10 @@
 								>{{ i.user|title }} ({{ i.user.account_number }}) was requested loan from you.</span>
 							</div>
 						</a>
-						{% elif i.status == 'Accepted' and i.editable == 'Requested' %}
+						{% endfor %}
+					{% endif %}
+					{% if update_request %}
+						{% for i in update_request %}
 						<a class="dropdown-item d-flex align-items-center" href="{% url 'notification' %}">
 							<div class="mr-3">
 								<div class="icon-circle bg-warning">
@@ -54,8 +57,8 @@
 								>{{ i.user|title }} ({{ i.user.account_number }}) wanted to change something in the loan.</span>
 							</div>
 						</a>
-						{% endif %}
-					{% endfor %}
+						{% endfor %}
+					{% endif %}
 					<a class="dropdown-item text-center small text-gray-500" href="{% url 'notification' %}"
 						>Show All Notifications</a>
 				{% else %}

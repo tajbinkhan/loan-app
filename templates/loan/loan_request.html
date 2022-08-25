@@ -34,3 +34,16 @@
 </div>
 
 {% endblock %}
+
+{% block script %}
+
+<script>
+	let trackInput = document.getElementById("id_account_number")
+
+	trackInput.addEventListener("input", function() {
+		upperCaseValue = trackInput.value.toUpperCase();
+		trackInput.value = upperCaseValue;
+	})
+</script>
+
+{% endblock %}
