@@ -94,9 +94,15 @@
 					Profile
 				</a>
 				<a class="dropdown-item" href="{% url 'update_profile' %}">
-					<i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+					<i class="fas fa-id-card mr-2 text-gray-400"></i>
 					Update Profile
 				</a>
+				{% if user.is_superuser %}
+				<a class="dropdown-item" href="/admin/" target="_blank">
+					<i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+					Admin Panel
+				</a>
+				{% endif %}
 				<div class="dropdown-divider"></div>
 				<a
 					class="dropdown-item"
