@@ -1,11 +1,13 @@
 #copy_text_account_number {
 	border: none;
 	outline: none;
+	background: none;
 }
 
 #copy_text_name {
 	border: none;
 	outline: none;
+	background: none;
 }
 
 span.copy {

@@ -44,8 +44,11 @@ class LoanForm(forms.Form):
 	def clean_account_number(self):
 		data = self.cleaned_data
 		account_number = data.get('account_number')
+		user = User.objects.filter(account_number=account_number)
 		if len(account_number) < 16 or len(account_number) > 16:
 			self.add_error('account_number', 'Account number requires 16 digits.')
+		elif not user.exists():
+			self.add_error('account_number', 'Enter correct account number.')
 		return account_number
 
 	def clean_account_name(self):
@@ -56,9 +59,10 @@ class LoanForm(forms.Form):
 			self.add_error('account_name', 'Enter correct account name.')
 		return account_name
 
-	def clean_date(self):
+	def clean_return_date(self):
 		data = self.cleaned_data
 		date = data.get('return_date')
+		print(date)
 		if date < datetime.now().date():
 			self.add_error('return_date', 'Past date can not be choosen.')
 		elif date == datetime.now().date():

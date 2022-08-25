@@ -32,7 +32,6 @@ def send_email_on_new_loan(sender, instance, created, *args, **kwargs):
 				msg = EmailMessage(subject, html_content, from_, to)
 			msg.content_subtype = "html"
 			msg.send()
-			print(html_content)
 		except:
 			pass
 

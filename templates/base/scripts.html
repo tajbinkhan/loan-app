@@ -16,10 +16,13 @@
 		copyText.select();
 		copyText.setSelectionRange(0, 99999);
 		navigator.clipboard.writeText(copyText.value);
-		console.log('ok');
 
 		var copy_text = document.getElementById("copy_account_number").innerHTML;
 		document.getElementById("copy_account_number").innerHTML = copy_text.replace("Copy", "Copied");
+		function reset() {
+			var reset = document.getElementById("copy_account_number").innerHTML = copy_text.replace("Copied", "Copy");
+		}
+		setTimeout(reset ,3000)
 	}
 
 	function copy_to_clipboard_name() {
@@ -28,10 +31,13 @@
 		copyText.select();
 		copyText.setSelectionRange(0, 99999);
 		navigator.clipboard.writeText(copyText.value);
-		console.log('ok');
 
 		var copy_text = document.getElementById("copy_username").innerHTML;
 		document.getElementById("copy_username").innerHTML = copy_text.replace("Copy", "Copied");
+		function reset() {
+			var reset = document.getElementById("copy_username").innerHTML = copy_text.replace("Copied", "Copy");
+		}
+		setTimeout(reset ,3000)
 	}
 
 	$(document).ready(function () {
