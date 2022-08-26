@@ -29,6 +29,8 @@
 	<h1 class="h3 mb-0 text-gray-800">Update Profile</h1>
 	{% elif url_name == 'show_profile' %}
 	<h1 class="h3 mb-0 text-gray-800">{{ user.username|title }}'s Profile</h1>
+	{% elif url_name == 'account_logout' %}
+	<h1 class="h3 mb-0 text-gray-800">Logout</h1>
 	{% endif %}
 	<ol class="breadcrumb">
 		{% if url_name == 'dashboard' %}
@@ -72,6 +74,9 @@
 		{% elif url_name == 'show_profile' %}
 		<li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
 		<li class="breadcrumb-item active" aria-current="page">{{ user.username|title }}'s Profile</li>
+		{% elif url_name == 'account_logout' %}
+		<li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+		<li class="breadcrumb-item active" aria-current="page">Logout</li>
 		{% endif %}
 	</ol>
 </div>

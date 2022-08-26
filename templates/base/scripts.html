@@ -8,8 +8,20 @@
 <script src="{% static 'vendor/datatables/jquery.dataTables.min.js' %}"></script>
 <script src="{% static 'vendor/datatables/dataTables.bootstrap4.min.js' %}"></script>
 
+<script src="https://unpkg.com/htmx.org@1.8.0" integrity="sha384-cZuAZ+ZbwkNRnrKi05G/fjBX+azI9DNOkNYysZ0I/X5ZFgsmMiBXgDZof30F5ofc" crossorigin="anonymous"></script>
+
 <!-- Page level custom scripts -->
 <script>
+	document.body.addEventListener('configRequest.htmx', (e) => {
+		e.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';
+	})
+	const logout = document.getElementById("logout")
+	logout.addEventListener('click', () => {
+		function logout_reload() {
+			location.reload();
+		}
+		setTimeout(logout_reload, 1000);
+	})
 	function copy_to_clipboard_account_number() {
 		var copyText = document.getElementById("copy_text_account_number");
 

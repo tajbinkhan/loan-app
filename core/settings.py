@@ -160,6 +160,7 @@ CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 LOGIN_REDIRECT_URL = 'dashboard'
 LOGIN_URL = 'account_login'
+LOGOUT_REDIRECT_URL = 'account_login'
 
 # Django All Auth Settings
 SITE_ID = 1

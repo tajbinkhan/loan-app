@@ -10,12 +10,15 @@ aria-hidden="true">
 				</button>
 			</div>
 			<div class="modal-body">
-				<p>Logout feature is not fully functional. We will update it soon. Thank you.</p>
+				<p>Are you sure, you want to logout?</p>
 			</div>
-			<!-- <div class="modal-footer">
+			<div class="modal-footer">
 				<button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
-				<a href="login.html" class="btn btn-primary">Logout</a>
-			</div> -->
+				<form method="POST">
+					{% csrf_token %}
+					<button hx-post="{% url 'account_logout' %}" hx-swap="none" id="logout" class="btn btn-primary">Logout</button>
+				</form>
+			</div>
 		</div>
 	</div>
 </div>
