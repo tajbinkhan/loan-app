@@ -91,7 +91,6 @@ TEMPLATES = [
 				'django.contrib.auth.context_processors.auth',
 				'django.contrib.messages.context_processors.messages',
 				'loan.context_processors.notification',
-				'loan.context_processors.count',
 			],
 		},
 	},
@@ -174,6 +173,10 @@ ACCOUNT_LOGOUT_REDIRECT_URL = "account_login"
 ACCOUNT_USERNAME_MIN_LENGTH = 4
 ACCOUNT_SIGNUP_REDIRECT_URL = "account_login"
 SOCIALACCOUNT_AUTO_SIGNUP = False
+
+ACCOUNT_FORMS = {
+	'login': 'accounts_profile.forms.CustomLoginForm',
+}
 
 # Email Settings
 EMAIL_USE_TLS = True

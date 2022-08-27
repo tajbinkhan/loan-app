@@ -1,15 +1,6 @@
 from .models import Loan
 
 def notification(request):
-	loan = None
-	if request.user.is_authenticated:
-		loan = Loan.objects.filter(money_lender=request.user)[:3]
-	context = {
-		'loan': loan
-	}
-	return context
-
-def count(request):
 	loan_request = None
 	update_request = None
 	if request.user.is_authenticated:
