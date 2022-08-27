@@ -45,7 +45,7 @@
 							<td>{{ i.return_date|date:"M d, Y" }}</td>
 							<td>{{ i.status }}</td>
 							<td>
-								<a href="{% url 'notification_approve' i.form_id %}" class="btn btn-primary btn-sm">
+								<a href="{% url 'show_profile' i.user.account_number %}" class="btn btn-primary btn-sm">
 									<i class="fas fa-user pr-2"></i>
 									View Profile
 								</a>

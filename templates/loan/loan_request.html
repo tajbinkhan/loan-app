@@ -28,7 +28,7 @@
 					{{ form.return_date|as_crispy_field }}
 				</div>
 			</div>
-			<button type="submit" class="btn btn-primary">Request For Loan</button>
+			{% include 'loan/partial/loan_request_button.html' %}
 		</form>
 	</div>
 </div>

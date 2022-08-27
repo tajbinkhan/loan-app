@@ -3,7 +3,9 @@ from .forms import LoanForm, LoanRequestAgainForm, LoanUpdateModelForm
 from .models import Loan, PreviousUserList
 from accounts_profile.models import User
 from django.contrib import messages
+from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
+from crispy_forms.templatetags.crispy_forms_filters import as_crispy_field
 
 # Create your views here.
 @login_required
@@ -239,3 +241,40 @@ def loan_delete(request, form_id):
 	else:
 		messages.warning(request, 'You have no premission to delete it.')
 	return redirect(request.META.get('HTTP_REFERER', 'redirect_if_referer_not_found'))
+
+# HTMX Check
+def check_account_number(request):
+	template_name = 'loan/partial/loan_request_button.html'
+	form = LoanForm(request.GET)
+	context = {
+		'field': as_crispy_field(form['account_number']),
+		'valid': not form['account_number'].errors
+	}
+	return render(request, template_name, context)
+
+def check_account_name(request):
+	template_name = 'loan/partial/loan_request_button.html'
+	form = LoanForm(request.GET)
+	context = {
+		'field': as_crispy_field(form['account_name']),
+		'valid': not form['account_name'].errors
+	}
+	return render(request, template_name, context)
+
+def check_amount(request):
+	template_name = 'loan/partial/loan_request_button.html'
+	form = LoanForm(request.GET)
+	context = {
+		'field': as_crispy_field(form['amount']),
+		'valid': not form['amount'].errors
+	}
+	return render(request, template_name, context)
+
+def check_return_date(request):
+	template_name = 'loan/partial/loan_request_button.html'
+	form = LoanForm(request.GET)
+	context = {
+		'field': as_crispy_field(form['return_date']),
+		'valid': not form['return_date'].errors
+	}
+	return render(request, template_name, context)

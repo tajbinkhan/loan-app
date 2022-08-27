@@ -16,7 +16,7 @@ aria-hidden="true">
 				<button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
 				<form method="POST">
 					{% csrf_token %}
-					<button hx-post="{% url 'account_logout' %}" hx-swap="none" id="logout" class="btn btn-primary">Logout</button>
+					<button hx-post="{% url 'account_logout' %}" hx-push-url="{% url 'dashboard' %}" hx-target="body" hx-swap="outerHtml" class="btn btn-primary">Logout</button>
 				</form>
 			</div>
 		</div>

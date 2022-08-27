@@ -15,13 +15,7 @@
 	document.body.addEventListener('configRequest.htmx', (e) => {
 		e.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';
 	})
-	const logout = document.getElementById("logout")
-	logout.addEventListener('click', () => {
-		function logout_reload() {
-			location.reload();
-		}
-		setTimeout(logout_reload, 1000);
-	})
+
 	function copy_to_clipboard_account_number() {
 		var copyText = document.getElementById("copy_text_account_number");
 

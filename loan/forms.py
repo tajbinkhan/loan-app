@@ -2,6 +2,7 @@ from datetime import datetime
 from django import forms
 from accounts_profile.models import User
 from .models import Loan
+from django.urls import reverse_lazy
 
 class LoanForm(forms.Form):
 	account_number = forms.CharField(
@@ -9,7 +10,10 @@ class LoanForm(forms.Form):
 		max_length=200,
 		widget=forms.TextInput(
 			attrs={
-				'placeholder': 'Account Number'
+				'placeholder': 'Account Number',
+				'hx-get': reverse_lazy('check_account_number'),
+				'hx-trigger': 'keyup changed',
+				'hx-target': '#div_id_account_number'
 			}
 		)
 	)
@@ -18,16 +22,22 @@ class LoanForm(forms.Form):
 		max_length=200,
 		widget=forms.TextInput(
 			attrs={
-				'placeholder': 'Account Name'
+				'placeholder': 'Account Name',
+				'hx-get': reverse_lazy('check_account_name'),
+				'hx-trigger': 'keyup changed',
+				'hx-target': '#div_id_account_name'
 			}
 		)
 	)
 	amount = forms.CharField(
 		label='Loan Amount',
 		max_length=100,
-		widget=forms.NumberInput(
+		widget=forms.TextInput(
 			attrs={
-				'placeholder': 'Enter loan amount (Minimum 50 BDT)'
+				'placeholder': 'Enter loan amount (Minimum 50 BDT)',
+				'hx-get': reverse_lazy('check_amount'),
+				'hx-trigger': 'keyup changed',
+				'hx-target': '#div_id_amount'
 			}
 		)
 	)
@@ -37,6 +47,9 @@ class LoanForm(forms.Form):
 		widget=forms.DateInput(
 			attrs={
 				'type': 'date',
+				'hx-get': reverse_lazy('check_return_date'),
+				'hx-trigger': 'change',
+				'hx-target': '#div_id_return_date'
 			}
 		)
 	)
@@ -59,6 +72,17 @@ class LoanForm(forms.Form):
 			self.add_error('account_name', 'Enter correct account name.')
 		return account_name
 
+	def clean_amount(self):
+		data = self.cleaned_data
+		amount = data.get('amount')
+		if amount < '0':
+			self.add_error('amount', 'Amount can not be negative.')
+		elif not amount.isnumeric():
+			self.add_error('amount', 'Amount must be a number.')
+		elif int(amount) < 50:
+			self.add_error('amount', 'Minimum amount is 50 BDT.')
+		return amount
+
 	def clean_return_date(self):
 		data = self.cleaned_data
 		date = data.get('return_date')
@@ -74,10 +98,20 @@ class LoanUpdateModelForm(forms.ModelForm):
 		model = Loan
 		fields = ['amount', 'return_date']
 		widgets = {
+			'amount': forms.NumberInput(
+				attrs={
+					'hx-get': reverse_lazy('check_amount'),
+					'hx-trigger': 'keyup changed',
+					'hx-target': '#div_id_amount'
+				}
+			),
 			'return_date': forms.DateInput(
 				format=('%Y-%m-%d'),
 				attrs={
-					'type':'date'
+					'type':'date',
+					'hx-get': reverse_lazy('check_return_date'),
+					'hx-trigger': 'change',
+					'hx-target': '#div_id_return_date'
 				}
 			),
 		}
@@ -86,9 +120,12 @@ class LoanRequestAgainForm(forms.Form):
 	amount = forms.CharField(
 		label='Loan Amount',
 		max_length=100,
-		widget=forms.NumberInput(
+		widget=forms.TextInput(
 			attrs={
-				'placeholder': 'Enter loan amount (Minimum 50 BDT)'
+				'placeholder': 'Enter loan amount (Minimum 50 BDT)',
+				'hx-get': reverse_lazy('check_amount'),
+				'hx-trigger': 'keyup changed',
+				'hx-target': '#div_id_amount'
 			}
 		)
 	)
@@ -98,9 +135,23 @@ class LoanRequestAgainForm(forms.Form):
 		widget=forms.DateInput(
 			attrs={
 				'type': 'date',
+				'hx-get': reverse_lazy('check_return_date'),
+				'hx-trigger': 'change',
+				'hx-target': '#div_id_return_date'
 			}
 		)
 	)
+
+	def clean_amount(self):
+		data = self.cleaned_data
+		amount = data.get('amount')
+		if amount < '0':
+			self.add_error('amount', 'Amount can not be negative.')
+		elif not amount.isnumeric():
+			self.add_error('amount', 'Amount must be a number.')
+		elif int(amount) < 50:
+			self.add_error('amount', 'Minimum amount is 50 BDT.')
+		return amount
 
 	def clean_date(self):
 		data = self.cleaned_data
