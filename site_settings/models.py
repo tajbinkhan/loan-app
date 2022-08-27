@@ -2,11 +2,12 @@ from django.db import models
 from ckeditor.fields import RichTextField
 
 # Create your models here.
-class DomainSetting(models.Model):
+class GeneralSetting(models.Model):
 	domain_name = models.CharField(max_length=50)
 	email_from = models.EmailField(max_length=50, verbose_name='Email From')
 	site_name = models.CharField(max_length=20)
 	protocol = models.CharField(max_length=5)
+	enable_email = models.BooleanField()
 
 	def __str__(self):
 		return self.site_name

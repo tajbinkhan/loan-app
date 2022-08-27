@@ -89,6 +89,13 @@
 			],
 				order: [[2, 'desc']]
 		});
+		$('#loan_history').DataTable({
+			"lengthMenu": [ 5, 25, 50, 75, 100 ],
+			columnDefs: [
+				{ orderable: false, targets: [5, 6] }
+			],
+				order: [[4, 'desc']]
+		});
 		$('#social_account').DataTable({
 			searching: false,
 			paging: false,

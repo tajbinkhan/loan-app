@@ -25,6 +25,7 @@ Money lending application with django framework. Only Django Framework and HTMX 
 - Email Address Validation
 - Count of Loan Given, Taken, Approved, Requested, Rejected
 - Change Email Feature
+- Notification History Added
 
 
 ## Installation

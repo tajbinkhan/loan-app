@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import LoanForm, LoanRequestAgainForm, LoanUpdateModelForm
-from .models import Loan, PreviousUserList
+from .models import Loan, NotificationHistory, PreviousUserList
 from accounts_profile.models import User
 from django.contrib import messages
 from django.http import HttpResponse
@@ -173,12 +173,14 @@ def update_loan(request, form_id):
 	}
 	return render(request, template_name, context)
 
+@login_required
 def notification(request):
 	template_name = 'loan/notification.html'
 	loan_requested_total = 0
 	update_request_total = 0
 	loan_requested = Loan.objects.filter(money_lender=request.user, status='Pending', editable='Not Applied')
 	update_request = Loan.objects.filter(money_lender=request.user, status='Accepted', editable='Requested')
+	history = NotificationHistory.objects.filter(user=request.user)
 
 	for i in loan_requested:
 		loan_requested_total = loan_requested_total + int(i.amount)
@@ -187,6 +189,7 @@ def notification(request):
 		update_request_total = update_request_total + int(i.amount)
 
 	context = {
+		'history': history,
 		'loan_requested': loan_requested,
 		'update_request': update_request,
 		'loan_requested_total': loan_requested_total,
@@ -240,6 +243,14 @@ def loan_delete(request, form_id):
 		messages.success(request, 'Successfully deleted.')
 	else:
 		messages.warning(request, 'You have no premission to delete it.')
+	return redirect(request.META.get('HTTP_REFERER', 'redirect_if_referer_not_found'))
+
+@login_required
+def mark_as_read(request, form_id):
+	notifier = get_object_or_404(NotificationHistory, form_id=form_id)
+	if notifier.mark_as_read == False:
+		notifier.mark_as_read = True
+		notifier.save()
 	return redirect(request.META.get('HTTP_REFERER', 'redirect_if_referer_not_found'))
 
 # HTMX Check

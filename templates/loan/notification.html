@@ -156,6 +156,107 @@
 	</div>
 	{% endif %}
 
+	{% if history %}
+	<div class="col-lg-12">
+		<div class="card mb-4">
+			<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+				<h6 class="m-0 font-weight-bold text-primary">Loan History</h6>
+			</div>
+			<div class="table-responsive p-3">
+				<table class="table align-items-center table-flush table-hover" id="loan_history">
+					<thead class="thead-light">
+						<tr>
+							<th>User</th>
+							<th>Amount (BDT)</th>
+							<th>Requested Date</th>
+							<th>Return Date</th>
+							<th>Updated</th>
+							<th>Status</th>
+							<th>Action</th>
+						</tr>
+					</thead>
+					<tfoot>
+						<tr>
+							<th>User</th>
+							<th>Amount (BDT)</th>
+							<th>Requested Date</th>
+							<th>Return Date</th>
+							<th>Updated</th>
+							<th>Status</th>
+							<th>Action</th>
+						</tr>
+					</tfoot>
+					<tbody>
+						{% for i in history %}
+							{% if request.user == i.loan_user.user %}
+							<tr>
+								<td>
+									<a href="{% url 'show_profile' i.loan_user.money_lender.account_number %}">{{ i.loan_user.money_lender|title }}</a>
+								</td>
+								<td>{{ i.loan_user.amount|intcomma }}</td>
+								<td>{{ i.loan_user.created|date:"M d, Y" }}</td>
+								<td>{{ i.loan_user.return_date|date:"M d, Y" }}</td>
+								<td>{{ i.updated }}</td>
+								<td>
+									{% if i.status == 'Accepted' and i.editable == 'Not Applied' %}
+									<span class="badge badge-success p-2">Loan Request Accepted</span>
+									{% elif i.status == 'Accepted' and i.editable == 'Approved' %}
+									<span class="badge badge-success p-2">Loan Edit Request Accepted</span>
+									{% elif i.status == 'Accepted' and i.editable == 'Not Approved' %}
+									<span class="badge badge-danger p-2">Loan Edit Request Rejected</span>
+									{% elif i.status == 'Accepted' and i.editable == 'Updated' %}
+									<span class="badge badge-success p-2">Loan Updated</span>
+									{% elif i.status == 'Rejected' and i.editable == 'Not Applied' %}
+									<span class="badge badge-danger p-2">Loan Request Rejected</span>
+									{% endif %}
+								</td>
+								<td>
+									{% if i.mark_as_read %}
+									<span class="badge badge-primary p-2">Marked as read</span>
+									{% else %}
+									<a href="{% url 'mark_as_read' i.form_id %}" class="btn btn-danger">Mark as read</a>
+									{% endif %}
+								</td>
+							</tr>
+							{% elif request.user == i.loan_user.money_lender %}
+							<tr>
+								<td>
+									<a href="{% url 'show_profile' i.loan_user.user.account_number %}">{{ i.loan_user.user|title }}</a>
+								</td>
+								<td>{{ i.loan_user.amount|intcomma }}</td>
+								<td>{{ i.loan_user.created|date:"M d, Y" }}</td>
+								<td>{{ i.loan_user.return_date|date:"M d, Y" }}</td>
+								<td>{{ i.updated }}</td>
+								<td>
+									{% if i.status == 'Accepted' and i.editable == 'Not Applied' %}
+									<span class="badge badge-success p-2">Loan Request Accepted</span>
+									{% elif i.status == 'Accepted' and i.editable == 'Approved' %}
+									<span class="badge badge-success p-2">Loan Edit Request Accepted</span>
+									{% elif i.status == 'Accepted' and i.editable == 'Not Approved' %}
+									<span class="badge badge-danger p-2">Loan Edit Request Rejected</span>
+									{% elif i.status == 'Accepted' and i.editable == 'Updated' %}
+									<span class="badge badge-success p-2">Loan Updated</span>
+									{% elif i.status == 'Rejected' and i.editable == 'Not Applied' %}
+									<span class="badge badge-danger p-2">Loan Request Rejected</span>
+									{% endif %}
+								</td>
+								<td>
+									{% if i.mark_as_read %}
+									<span class="badge badge-primary p-2">Marked as read</span>
+									{% else %}
+									<a href="{% url 'mark_as_read' i.form_id %}" class="btn btn-danger">Mark as read</a>
+									{% endif %}
+								</td>
+							</tr>
+							{% endif %}
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	{% endif %}
+
 </div>
 
 {% endblock %}

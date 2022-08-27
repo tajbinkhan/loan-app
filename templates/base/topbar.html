@@ -26,7 +26,7 @@
 				aria-labelledby="alertsDropdown"
 			>
 				<h6 class="dropdown-header">Notifications Center</h6>
-				{% if loan_request or update_request %}
+				{% if loan_request or update_request or notification_history %}
 					{% if loan_request %}
 						{% for i in loan_request %}
 							{% if forloop.counter < 4 %}
@@ -58,6 +58,24 @@
 									<div class="small text-gray-500">{{ i.updated|date:"M d, Y" }}</div>
 									<span class="font-weight-bold"
 									>{{ i.user|title }} ({{ i.user.account_number }}) wanted to change something in the loan.</span>
+								</div>
+							</a>
+							{% endif %}
+						{% endfor %}
+					{% endif %}
+					{% if notification_history %}
+						{% for i in notification_history %}
+							{% if forloop.counter < 3 %}
+							<a class="dropdown-item d-flex align-items-center" href="{% url 'notification' %}">
+								<div class="mr-3">
+									<div class="icon-circle bg-secondary">
+										<i class="fas fa-bell text-white"></i>
+									</div>
+								</div>
+								<div>
+									<div class="small text-gray-500">{{ i.updated|date:"M d, Y" }}</div>
+									<span class="font-weight-bold"
+									>You're loan request has been updated.</span>
 								</div>
 							</a>
 							{% endif %}

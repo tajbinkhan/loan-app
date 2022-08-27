@@ -38,7 +38,7 @@ class Loan(models.Model):
 		ordering = ['-created']
 
 	def __str__(self):
-		return self.user.username
+		return f'{self.id} - {self.user.username}({self.form_id}) - {self.created}'
 
 class PreviousUserList(models.Model):
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -50,3 +50,22 @@ class PreviousUserList(models.Model):
 
 	def __str__(self):
 		return self.user.username
+
+class NotificationHistory(models.Model):
+	form_id = models.CharField(max_length=32, null=True, blank=True)
+	user = models.ForeignKey(User, on_delete=models.CASCADE)
+	amount = models.PositiveIntegerField(verbose_name='Loan Amount')
+	loan_user = models.ForeignKey(Loan, on_delete=models.CASCADE, verbose_name='Loan User')
+	status = models.CharField(max_length=8, choices=STATUS)
+	editable = models.CharField(max_length=14, choices=EDITABLE_STATUS)
+	mark_as_read = models.BooleanField(default=False, verbose_name='Mark as Read')
+	updated = models.DateTimeField(auto_now=True, verbose_name='Updated Date')
+	created = models.DateTimeField(auto_now_add=True, verbose_name='Created Date')
+
+	class Meta:
+		verbose_name = 'Notification history'
+		verbose_name_plural = 'Notification histories'
+		ordering = ['-updated']
+
+	def __str__(self):
+		return str(self.loan_user)

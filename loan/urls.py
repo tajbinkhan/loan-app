@@ -26,6 +26,7 @@ urlpatterns = [
 	path('request/update/<str:form_id>/', views.request_for_update, name='request_for_update'),
 	path('request/update/approve/<str:form_id>/', views.request_for_update_approve, name='request_for_update_approve'),
 	path('request/update/deny/<str:form_id>/', views.request_for_update_deny, name='request_for_update_deny'),
+	path('read/<str:form_id>/', views.mark_as_read, name='mark_as_read'),
 
 	# HTMX Check
 	path('check-account-number/', views.check_account_number, name='check_account_number'),
