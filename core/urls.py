@@ -9,6 +9,7 @@ from . import views
 urlpatterns = [
 	path('admin/', admin.site.urls),
 	path('accounts/', RedirectView.as_view(url=reverse_lazy('account_login'), permanent=False)),
+	path('accounts/password/', RedirectView.as_view(url=reverse_lazy('account_login'), permanent=False)),
 	path('accounts/', include('allauth.urls')),
 	path('', include('loan.urls')),
 	path('', include('accounts_profile.urls')),
