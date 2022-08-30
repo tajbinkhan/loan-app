@@ -28,8 +28,8 @@
 						</thead>
 						<tfoot>
 							<tr>
-								<th>Money Lender</th>
-								<th>Amount (BDT)</th>
+								<th>Total</th>
+								<th>{{ loan_requested_total|intcomma }}</th>
 								<th>Requested Date</th>
 								<th>Return Date</th>
 								<th>Status</th>
@@ -56,18 +56,6 @@
 								</td>
 							</tr>
 							{% endfor %}
-							<tr>
-								<td>
-									<strong>Total</strong>
-								</td>
-								<td>
-									<strong>{{ loan_requested_total|intcomma }}</strong>
-								</td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
 						</tbody>
 					</table>
 				</div>
@@ -97,8 +85,8 @@
 						</thead>
 						<tfoot>
 							<tr>
-								<th>Money Lender</th>
-								<th>Amount (BDT)</th>
+								<th>Total</th>
+								<th>{{ update_request_total|intcomma }}</th>
 								<th>Requested Date</th>
 								<th>Return Date</th>
 								<th>Status</th>
@@ -125,18 +113,6 @@
 								</td>
 							</tr>
 							{% endfor %}
-							<tr>
-								<td>
-									<strong>Total</strong>
-								</td>
-								<td>
-									<strong>{{ update_request_total|intcomma }}</strong>
-								</td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
 						</tbody>
 					</table>
 				</div>

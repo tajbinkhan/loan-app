@@ -51,6 +51,7 @@ INSTALLED_APPS = [
 	'loan.apps.LoanConfig',
 	'accounts_profile.apps.AccountsProfileConfig',
 	'site_settings.apps.SiteSettingsConfig',
+	'bank.apps.BankConfig',
 
 	# Installed Apps
 	'crispy_forms',

@@ -12,6 +12,7 @@ urlpatterns = [
 	path('accounts/password/', RedirectView.as_view(url=reverse_lazy('account_login'), permanent=False)),
 	path('accounts/', include('allauth.urls')),
 	path('', include('loan.urls')),
+	path('', include('bank.urls')),
 	path('', include('accounts_profile.urls')),
 	path('privacy-policy/', views.privacy_policy, name='privacy_policy'),
 	path('terms-of-services/', views.terms_of_services, name='terms_of_services'),

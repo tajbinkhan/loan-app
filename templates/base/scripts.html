@@ -68,6 +68,20 @@
 			],
 				order: [[2, 'desc']]
 		});
+		$('#statement_list').DataTable({
+			"lengthMenu": [25, 50, 75, 100 ],
+			columnDefs: [
+				{ orderable: false, targets: 6 }
+			],
+				order: [[0, 'desc']]
+		});
+		$('#interest_statement_list').DataTable({
+			"lengthMenu": [5, 25, 50, 75, 100 ],
+			columnDefs: [
+				{ orderable: false, targets: 5 }
+			],
+				order: [[0, 'desc']]
+		});
 		$('#previous_user_list').DataTable({
 			"lengthMenu": [ 5, 25, 50, 75, 100 ],
 			columnDefs: [

@@ -29,6 +29,16 @@
 	<h1 class="h3 mb-0 text-gray-800">Update Profile</h1>
 	{% elif url_name == 'show_profile' %}
 	<h1 class="h3 mb-0 text-gray-800">{{ user.username|title }}'s Profile</h1>
+	{% elif url_name == 'statement_list' %}
+	<h1 class="h3 mb-0 text-gray-800">Statement List</h1>
+	{% elif url_name == 'statement_create' %}
+	<h1 class="h3 mb-0 text-gray-800">Statement Create</h1>
+	{% elif url_name == 'statement_update' %}
+	<h1 class="h3 mb-0 text-gray-800">Statement Update</h1>
+	{% elif url_name == 'interest_statement_create' %}
+	<h1 class="h3 mb-0 text-gray-800">Interest Statement Create</h1>
+	{% elif url_name == 'interest_statement_update' %}
+	<h1 class="h3 mb-0 text-gray-800">Interest Statement Update</h1>
 	{% elif url_name == 'account_logout' %}
 	<h1 class="h3 mb-0 text-gray-800">Logout</h1>
 	{% endif %}
@@ -74,6 +84,21 @@
 		{% elif url_name == 'show_profile' %}
 		<li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
 		<li class="breadcrumb-item active" aria-current="page">{{ user.username|title }}'s Profile</li>
+		{% elif url_name == 'statement_list' %}
+		<li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+		<li class="breadcrumb-item active" aria-current="page">Statement List</li>
+		{% elif url_name == 'statement_create' %}
+		<li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+		<li class="breadcrumb-item active" aria-current="page">Statement Create</li>
+		{% elif url_name == 'statement_update' %}
+		<li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+		<li class="breadcrumb-item active" aria-current="page">Statement Update</li>
+		{% elif url_name == 'interest_statement_create' %}
+		<li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+		<li class="breadcrumb-item active" aria-current="page">Interest Statement Create</li>
+		{% elif url_name == 'interest_statement_update' %}
+		<li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+		<li class="breadcrumb-item active" aria-current="page">Interest Statement Update</li>
 		{% elif url_name == 'account_logout' %}
 		<li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
 		<li class="breadcrumb-item active" aria-current="page">Logout</li>

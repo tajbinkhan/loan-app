@@ -38,36 +38,36 @@ Loan Re-request From
 
 	{% elif request.resolver_match.url_name == 'update_loan' %}
 
-	{% if loan.editable == 'Approved' %}
+		{% if loan_approve.editable == 'Approved' %}
 
-	<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-		<h6 class="m-0 font-weight-bold text-primary">Update Loan Form</h6>
-	</div>
-	<div class="card-body">
-		<form method="POST">
-			{% csrf_token %}
-			<div class="row">
-				<div class="col-md-6">
-					{{ form.amount|as_crispy_field }}
+		<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+			<h6 class="m-0 font-weight-bold text-primary">Update Loan Form</h6>
+		</div>
+		<div class="card-body">
+			<form method="POST">
+				{% csrf_token %}
+				<div class="row">
+					<div class="col-md-6">
+						{{ form.amount|as_crispy_field }}
+					</div>
+					<div class="col-md-6">
+						{{ form.return_date|as_crispy_field }}
+					</div>
 				</div>
-				<div class="col-md-6">
-					{{ form.return_date|as_crispy_field }}
-				</div>
-			</div>
-			<button type="submit" class="btn btn-primary">Update</button>
-		</form>
-	</div>
+				<button type="submit" class="btn btn-primary">Update</button>
+			</form>
+		</div>
 
-	{% else %}
+		{% else %}
 
-	<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-		<h6 class="m-0 font-weight-bold text-primary">Not Eligible</h6>
-	</div>
-	<div class="card-body">
-		<h4>{{ not_eligible }}</h4>
-	</div>
+		<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+			<h6 class="m-0 font-weight-bold text-primary">Not Eligible</h6>
+		</div>
+		<div class="card-body">
+			<h4>You're not eligible to update your loan.</h4>
+		</div>
 
-	{% endif %}
+		{% endif %}
 
 	{% else %}
 

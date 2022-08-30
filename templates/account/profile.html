@@ -1,6 +1,6 @@
 {% extends "base/base.html" %}
 {% load static %}
-
+{% load humanize %}
 {% block title %}Profile{% endblock %}
 
 {% block content %}
@@ -34,6 +34,18 @@
 						</tr>
 						{% if show %}
 						<tr>
+							<th scope="row">Initial Bank Balance</th>
+							<td>{{ user.initial_bank_balance|intcomma }} (BDT)</td>
+						</tr>
+						<tr>
+							<th scope="row">Current Bank Balance</th>
+							<td>{{ current_bank_balance|intcomma }} (BDT) (With Interest)</td>
+						</tr>
+						<tr>
+							<th scope="row">Interest Balance</th>
+							<td>{{ interest_balance|intcomma }} (BDT)</td>
+						</tr>
+						<tr>
 							<th scope="row">Approved</th>
 							<td>{{ accepted }}</td>
 						</tr>
@@ -49,6 +61,14 @@
 							<th scope="row">Given</th>
 							<td>{{ given }}</td>
 						</tr>
+						<tr>
+							<th scope="row">Requested Amount</th>
+							<td>{{ requested_amount_total|intcomma }} (BDT)</td>
+						</tr>
+						<tr>
+							<th scope="row">Given Amount</th>
+							<td>{{ given_amount_total|intcomma }} (BDT)</td>
+						</tr>
 						{% endif %}
 					</tbody>
 				</table>
@@ -60,5 +80,97 @@
 		{% endif %}
 	</div>
 </div>
+
+{% if show %}
+	<div class="row">
+		<!-- Total Loan Requested -->
+		<div class="col-lg-12">
+			<div class="card mb-4">
+				<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+					<h6 class="m-0 font-weight-bold text-primary">Total Loan Requested</h6>
+				</div>
+				<div class="table-responsive p-3">
+					<table class="table align-items-center table-flush table-hover" id="total_loan_requested">
+						<thead class="thead-light">
+							<tr>
+								<th>Requested User</th>
+								<th>Amount (BDT)</th>
+								<th>Requested Date</th>
+								<th>Return Date</th>
+								<th>Status</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tfoot>
+							<tr>
+								<th>Total</th>
+								<th></th>
+								<th>Requested Date</th>
+								<th>Return Date</th>
+								<th>Status</th>
+								<th>Action</th>
+							</tr>
+						</tfoot>
+						<tbody>
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<!-- Total Loan Given -->
+		<div class="col-lg-12">
+			<div class="card mb-4">
+				<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+					<h6 class="m-0 font-weight-bold text-primary">Total Loan Given</h6>
+				</div>
+				<div class="table-responsive p-3">
+					<table class="table align-items-center table-flush table-hover" id="total_loan_given">
+						<thead class="thead-light">
+							<tr>
+								<th>Given User</th>
+								<th>Amount (BDT)</th>
+								<th>Requested Date</th>
+								<th>Return Date</th>
+								<th>Status</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tfoot>
+							<tr>
+								<th>Total</th>
+								<th></th>
+								<th>Requested Date</th>
+								<th>Return Date</th>
+								<th>Status</th>
+								<th>Action</th>
+							</tr>
+						</tfoot>
+						<tbody>
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endif %}
 
 {% endblock %}

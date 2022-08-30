@@ -27,6 +27,13 @@ Money lending application with django framework. Only Django Framework and HTMX 
 - Change Email Feature
 - Notification History Added
 
+## New Features
+
+- Bank Statement Added
+- Crud Funcationality Added
+- Add Balance Feature to Profile
+- Some Bug Fixes
+
 
 ## Installation
 

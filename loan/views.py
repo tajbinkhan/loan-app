@@ -3,7 +3,6 @@ from .forms import LoanForm, LoanRequestAgainForm, LoanUpdateModelForm
 from .models import Loan, NotificationHistory, PreviousUserList
 from accounts_profile.models import User
 from django.contrib import messages
-from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from crispy_forms.templatetags.crispy_forms_filters import as_crispy_field
 
@@ -150,26 +149,24 @@ def loan_request_again(request, account_number):
 @login_required
 def update_loan(request, form_id):
 	template_name = 'loan/loan_request_again.html'
-	loan = get_object_or_404(Loan, form_id=form_id)
+	loan_approve = get_object_or_404(Loan, form_id=form_id)
 	form = LoanUpdateModelForm()
-	if loan.editable == 'Approved':
+	if loan_approve.editable == 'Approved':
 		if request.method == 'POST':
-			form = LoanUpdateModelForm(request.POST, instance=loan)
+			form = LoanUpdateModelForm(request.POST, instance=loan_approve)
 			if form.is_valid():
 				form.save()
-				loan.editable = 'Updated'
-				loan.save()
+				loan_approve.editable = 'Updated'
+				loan_approve.save()
 				messages.info(request, 'Requested Loan Successfully Updated!')
 				return redirect('dashboard')
 			else:
 				messages.error(request, 'Something went wrong. Please try again!!!')
 		else:
-			form = LoanUpdateModelForm(instance=loan)
-	else:
-		not_eligible = "You're not eligible to update your loan."
+			form = LoanUpdateModelForm(instance=loan_approve)
 	context = {
 		'form': form,
-		'not_eligible': not_eligible
+		'loan_approve': loan_approve
 	}
 	return render(request, template_name, context)
 

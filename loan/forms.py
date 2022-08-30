@@ -98,7 +98,7 @@ class LoanUpdateModelForm(forms.ModelForm):
 		model = Loan
 		fields = ['amount', 'return_date']
 		widgets = {
-			'amount': forms.NumberInput(
+			'amount': forms.TextInput(
 				attrs={
 					'hx-get': reverse_lazy('check_amount'),
 					'hx-trigger': 'keyup changed',
@@ -115,6 +115,24 @@ class LoanUpdateModelForm(forms.ModelForm):
 				}
 			),
 		}
+
+	def clean_amount(self):
+		data = self.cleaned_data
+		amount = data.get('amount')
+		if amount < 0:
+			self.add_error('amount', 'Amount can not be negative.')
+		elif amount < 50:
+			self.add_error('amount', 'Minimum amount is 50 BDT.')
+		return amount
+
+	def clean_return_date(self):
+		data = self.cleaned_data
+		date = data.get('return_date')
+		if date < datetime.now().date():
+			self.add_error('return_date', 'Past date can not be choosen.')
+		elif date == datetime.now().date():
+			self.add_error('return_date', 'Today can not be returned date.')
+		return date
 
 class LoanRequestAgainForm(forms.Form):
 	amount = forms.CharField(

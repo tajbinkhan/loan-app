@@ -8,6 +8,7 @@ from core.filename import profile_upload_image_path
 class User(AbstractUser):
 	email = models.EmailField(max_length=120, blank=False, null=False, unique=True)
 	profile_pic = models.ImageField(upload_to=profile_upload_image_path, null=True, blank=True, default='avatar.png', verbose_name='Profile picture')
+	initial_bank_balance = models.PositiveBigIntegerField(default=0)
 	account_number = models.CharField(max_length=16, verbose_name='Account Number', null=True, blank=True)
 
 	def save(self, *args, **kwargs):

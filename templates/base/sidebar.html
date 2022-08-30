@@ -17,8 +17,36 @@
 	<li class="nav-item {% if url_name == 'dashboard' %}active{% endif %}">
 		<a class="nav-link" href="{% url 'dashboard' %}">
 			<i class="fas fa-fw fa-tachometer-alt"></i>
-			<span>Dashboard</span></a
+			<span>Dashboard</span>
+		</a>
+	</li>
+	<hr class="sidebar-divider" />
+	<div class="sidebar-heading">Bank Management</div>
+	<li class="nav-item {% if url_name == 'statement_list' or url_name == 'statement_create' or url_name == 'interest_statement_create' %}active{% endif %}">
+		<a
+			class="nav-link collapsed"
+			href="#"
+			data-toggle="collapse"
+			data-target="#bankStatement"
+			aria-expanded="true"
+			aria-controls="bankStatement"
 		>
+		<i class="fas fa-clipboard-list"></i>
+			<span>Statement</span>
+		</a>
+		<div
+			id="bankStatement"
+			class="collapse {% if url_name == 'statement_list' or url_name == 'statement_create' or url_name == 'interest_statement_create' %}show{% endif %}"
+			aria-labelledby="headingBootstrap"
+			data-parent="#accordionSidebar"
+		>
+			<div class="bg-white py-2 collapse-inner rounded">
+				<h6 class="collapse-header">Statement</h6>
+				<a class="collapse-item {% if url_name == 'statement_list' %}active{% endif %}" href="{% url 'statement_list' %}">List of Statement</a>
+				<a class="collapse-item {% if url_name == 'statement_create' %}active{% endif %}" href="{% url 'statement_create' %}">Add Statement</a>
+				<a class="collapse-item {% if url_name == 'interest_statement_create' %}active{% endif %}" href="{% url 'interest_statement_create' %}">Add Interest</a>
+			</div>
+		</div>
 	</li>
 	<hr class="sidebar-divider" />
 	<div class="sidebar-heading">Loan Management</div>
@@ -27,15 +55,15 @@
 			class="nav-link collapsed"
 			href="#"
 			data-toggle="collapse"
-			data-target="#collapseBootstrap"
+			data-target="#loanManagement"
 			aria-expanded="true"
-			aria-controls="collapseBootstrap"
+			aria-controls="loanManagement"
 		>
 		<i class="fas fa-landmark"></i>
 			<span>Loan</span>
 		</a>
 		<div
-			id="collapseBootstrap"
+			id="loanManagement"
 			class="collapse {% if url_name == 'loan_form' or url_name == 'previous_user_list' or url_name == 'loan_requested' %}show{% endif %}"
 			aria-labelledby="headingBootstrap"
 			data-parent="#accordionSidebar"
