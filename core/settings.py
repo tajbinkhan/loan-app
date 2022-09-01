@@ -114,7 +114,7 @@ if DEBUG:
 else:
 	DATABASES = {
 		'default': {
-			'ENGINE': config('DATABASE_URL'),
+			'ENGINE': 'django.db.backends.postgresql',
 			'NAME': config('PGDATABASE'),
 			'USER': config('PGUSER'),
 			'PASSWORD': config('PGPASSWORD'),
