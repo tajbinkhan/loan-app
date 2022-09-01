@@ -188,9 +188,13 @@
 								</td>
 								<td>
 									{% if i.mark_as_read %}
-									<span class="badge badge-primary p-2">Marked as read</span>
+									<span class="btn btn-primary">
+										<i class="fas fa-envelope-open"></i>
+									</span>
 									{% else %}
-									<a href="{% url 'mark_as_read' i.form_id %}" class="btn btn-danger">Mark as read</a>
+									<a href="{% url 'mark_as_read' i.form_id %}" class="btn btn-danger">
+										<i class="fas fa-envelope"></i>
+									</a>
 									{% endif %}
 								</td>
 							</tr>
