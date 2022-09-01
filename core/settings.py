@@ -35,7 +35,7 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 
 # ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'loanapp.pythonanywhere.com']
 ALLOWED_HOSTS = ['*']
-CSRF_TRUSTED_ORIGINS = ['https://web-production-3271.up.railway.app/']
+CSRF_TRUSTED_ORIGINS = ['https://web-production-3271.up.railway.app']
 
 # Application definition
 
