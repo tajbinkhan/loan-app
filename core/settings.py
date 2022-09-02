@@ -33,9 +33,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-# ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'loanapp.pythonanywhere.com']
-ALLOWED_HOSTS = ['*']
-CSRF_TRUSTED_ORIGINS = ['https://web-production-3271.up.railway.app']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'loanapp.pythonanywhere.com']
 
 # Application definition
 
@@ -104,24 +102,12 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-if DEBUG:
-	DATABASES = {
-		'default': {
-			'ENGINE': 'django.db.backends.sqlite3',
-			'NAME': BASE_DIR / 'db.sqlite3',
-		}
+DATABASES = {
+	'default': {
+		'ENGINE': 'django.db.backends.sqlite3',
+		'NAME': BASE_DIR / 'db.sqlite3',
 	}
-else:
-	DATABASES = {
-		'default': {
-			'ENGINE': 'django.db.backends.postgresql_psycopg2',
-			'NAME': config("PGDATABASE"),
-			'USER': config("PGUSER"),
-			'PASSWORD': config("PGPASSWORD"),
-			'HOST': config("PGHOST"),
-			'PORT': config("PGPORT"),
-		}
-	}
+}
 
 
 # Password validation
