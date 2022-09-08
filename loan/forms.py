@@ -13,7 +13,8 @@ class LoanForm(forms.Form):
 				'placeholder': 'Account Number',
 				'hx-get': reverse_lazy('check_account_number'),
 				'hx-trigger': 'keyup changed',
-				'hx-target': '#div_id_account_number'
+				'hx-target': '#div_id_account_number',
+				'onkeyup': "this.value = this.value.toUpperCase();"
 			}
 		)
 	)
@@ -32,12 +33,9 @@ class LoanForm(forms.Form):
 	amount = forms.CharField(
 		label='Loan Amount',
 		max_length=100,
-		widget=forms.TextInput(
+		widget=forms.NumberInput(
 			attrs={
 				'placeholder': 'Enter loan amount (Minimum 50 BDT)',
-				'hx-get': reverse_lazy('check_amount'),
-				'hx-trigger': 'keyup changed',
-				'hx-target': '#div_id_amount'
 			}
 		)
 	)
@@ -98,13 +96,7 @@ class LoanUpdateModelForm(forms.ModelForm):
 		model = Loan
 		fields = ['amount', 'return_date']
 		widgets = {
-			'amount': forms.TextInput(
-				attrs={
-					'hx-get': reverse_lazy('check_amount'),
-					'hx-trigger': 'keyup changed',
-					'hx-target': '#div_id_amount'
-				}
-			),
+			'amount': forms.NumberInput(),
 			'return_date': forms.DateInput(
 				format=('%Y-%m-%d'),
 				attrs={
@@ -138,12 +130,9 @@ class LoanRequestAgainForm(forms.Form):
 	amount = forms.CharField(
 		label='Loan Amount',
 		max_length=100,
-		widget=forms.TextInput(
+		widget=forms.NumberInput(
 			attrs={
 				'placeholder': 'Enter loan amount (Minimum 50 BDT)',
-				'hx-get': reverse_lazy('check_amount'),
-				'hx-trigger': 'keyup changed',
-				'hx-target': '#div_id_amount'
 			}
 		)
 	)

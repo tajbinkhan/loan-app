@@ -269,15 +269,6 @@ def check_account_name(request):
 	}
 	return render(request, template_name, context)
 
-def check_amount(request):
-	template_name = 'loan/partial/loan_request_button.html'
-	form = LoanForm(request.GET)
-	context = {
-		'field': as_crispy_field(form['amount']),
-		'valid': not form['amount'].errors
-	}
-	return render(request, template_name, context)
-
 def check_return_date(request):
 	template_name = 'loan/partial/loan_request_button.html'
 	form = LoanForm(request.GET)

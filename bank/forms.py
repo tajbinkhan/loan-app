@@ -8,12 +8,9 @@ class StatementModelForm(forms.ModelForm):
 		model = Statement
 		fields = ['amount', 'status', 'description', 'entry_date']
 		widgets = {
-			'amount': forms.TextInput(
+			'amount': forms.NumberInput(
 				attrs={
 					'placeholder': 'Enter amount',
-					'hx-get': reverse_lazy('check_amount'),
-					'hx-trigger': 'keyup changed',
-					'hx-target': '#div_id_amount'
 				}
 			),
 			'description': forms.TextInput(
@@ -51,12 +48,9 @@ class InterestStatementModelForm(forms.ModelForm):
 		model = InterestStatement
 		fields = ['amount', 'tax', 'entry_date']
 		widgets = {
-			'amount': forms.TextInput(
+			'amount': forms.NumberInput(
 				attrs={
 					'placeholder': 'Enter amount',
-					'hx-get': reverse_lazy('check_interest_amount'),
-					'hx-trigger': 'keyup changed',
-					'hx-target': '#div_id_amount'
 				}
 			),
 			'tax': forms.TextInput(

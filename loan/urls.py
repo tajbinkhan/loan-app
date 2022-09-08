@@ -31,6 +31,5 @@ urlpatterns = [
 	# HTMX Check
 	path('check-account-number/', views.check_account_number, name='check_account_number'),
 	path('check-account-name/', views.check_account_name, name='check_account_name'),
-	path('check-amount/', views.check_amount, name='check_amount'),
 	path('check-return-date/', views.check_return_date, name='check_return_date'),
 ]
