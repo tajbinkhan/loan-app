@@ -1,6 +1,6 @@
 # Loan App With Django Framework
 
-Money lending application with django framework. Only Django Framework and HTMX plugin used for ajax validation and ajax logout.
+Money lending application with Django framework. Only Django Framework and HTMX plugin are used for Ajax validation and Ajax logout.
 
 
 ## Screenshots
@@ -30,7 +30,7 @@ Money lending application with django framework. Only Django Framework and HTMX 
 ## New Features
 
 - Bank Statement Added
-- Crud Funcationality Added
+- Crud Functionality Added
 - Add Balance Feature to Profile
 - Some Bug Fixes
 
@@ -42,27 +42,27 @@ Install my-project with pip
 Clone the project
 
 ```bash
-  git clone https://github.com/tajbinkhan/loan-app.git
+git clone https://github.com/tajbinkhan/loan-app.git
 ```
 
 Go to the project directory
 
 ```bash
-  cd loan-app
+cd loan-app
 ```
 
-In command panel, run this command.
+In the command panel, run this command.
 ```bash
-  pip install -r requirements.txt
+pip install -r requirements.txt
 ```
-After successfull installation, you need to start the migration to create table in the database.
+After successful installation, you need to start the migration to create tables in the database.
 ```bash
-  python manage.py makemigrations
-  python manage.py migrate
+python manage.py makemigrations
+python manage.py migrate
 ```
 After migration, start the server by running this command.
 ```bash
-  python manage.py runserver
+python manage.py runserver
 ```
 
 ## Demo
